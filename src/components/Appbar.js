@@ -8,6 +8,7 @@ import {
   IconButton,
   Avatar,
   makeStyles,
+  Grid
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
@@ -84,7 +85,7 @@ const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked ,header}) => {
           )}
         </Toolbar>
       </AppBar>
-    </>
+      </>
   );
 };
 

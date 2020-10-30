@@ -227,7 +227,7 @@ const dummyData = {
       classroomID: "classroom01",
       teachers: ["teacher01","teacher02","teacher03","teacher04"],
       students: [],
-      homeworks: ["homework01","homework02","homework03","homework04","homework05","homework06","homework07","homework08"],
+      homeworks: ["homework01"],
     },
     {
       school:"FT",
@@ -236,7 +236,7 @@ const dummyData = {
       classroomID: "classroom02",
       teachers: ["teacher01","teacher02","teacher03","teacher04"],
       students: [],
-      homeworks: ["homework01","homework02","homework03","homework04","homework05","homework06","homework07","homework08"],
+      homeworks: ["homework02"],
     },
     {
       school:"FT",
@@ -245,7 +245,7 @@ const dummyData = {
       classroomID: "classroom03",
       teachers: ["teacher01","teacher02","teacher03","teacher04"],
       students: [],
-      homeworks: ["homework01","homework02","homework03","homework04","homework05","homework06","homework07","homework08"],
+      homeworks: ["homework03"],
     },
     {
       school:"FT",
@@ -254,7 +254,7 @@ const dummyData = {
       classroomID: "classroom04",
       teachers: ["teacher01","teacher02","teacher03","teacher04"],
       students: [],
-      homeworks: ["homework01","homework02","homework03","homework04","homework05","homework06","homework07","homework08"],
+      homeworks: ["homework04"],
     },
     {
       school:"DNE",
@@ -263,7 +263,7 @@ const dummyData = {
       classroomID: "classroom05",
       teachers: ["teacher05","teacher06","teacher07","teacher08"],
       students: [],
-      homeworks: [],
+      homeworks: ["homework05"],
     },
     {
       school:"DNE",
@@ -272,7 +272,7 @@ const dummyData = {
       classroomID: "classroom06",
       teachers: ["teacher05","teacher06","teacher07","teacher08"],
       students: [],
-      homeworks: [],
+      homeworks: ["homework06"],
     },
     {
       school:"DNE",
@@ -281,7 +281,7 @@ const dummyData = {
       classroomID: "classroom07",
       teachers: ["teacher05","teacher06","teacher07","teacher08"],
       students: [],
-      homeworks: [],
+      homeworks: ["homework07"],
     },
     {
       school:"DNE",
@@ -290,7 +290,7 @@ const dummyData = {
       classroomID: "classroom08",
       teachers: ["teacher05","teacher06","teacher07","teacher08"],
       students: [],
-      homeworks: [],
+      homeworks: ["homework08"],
     },
   ],
   homeworks: [
@@ -309,7 +309,7 @@ const dummyData = {
     },
     {
       school:"FT",
-      classroom:"5-A",
+      classroom:"6-B",
       homeworkID: "homework03",
       teacher: "Recep",
       branch:"Turkish Literature",
@@ -322,7 +322,7 @@ const dummyData = {
     },
     {
       school:"FT",
-      classroom:"5-A",
+      classroom:"5-B",
       homeworkID: "homework02",
       teacher: "Jhon",
       branch:"English Literature",
@@ -335,7 +335,7 @@ const dummyData = {
     },
     {
       school:"FT",
-      classroom:"5-A",
+      classroom:"8-A",
       homeworkID: "homework04",
       teacher: "Jhon",
       branch:"English Literature",
@@ -348,8 +348,8 @@ const dummyData = {
     },
     
     {
-      school:"FT",
-      classroom:"5-A",
+      school:"DNE",
+      classroom:"7-A",
       homeworkID: "homework05",
       teacher: "Marco",
       branch:"Science",
@@ -361,8 +361,8 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"FT",
-      classroom:"5-A",
+      school:"DNE",
+      classroom:"7-C",
       homeworkID: "homework07",
       teacher: "Marco",
       branch:"Science",
@@ -374,8 +374,8 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"FT",
-      classroom:"5-A",
+      school:"DNE",
+      classroom:"7-B",
       homeworkID: "homework06",
       teacher: "Marcello",
       branch:"Technology",
@@ -387,8 +387,8 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"FT",
-      classroom:"5-A",
+      school:"DNE",
+      classroom:"7-D",
       homeworkID: "homework08",
       teacher: "Marcello",
       branch:"Technology",

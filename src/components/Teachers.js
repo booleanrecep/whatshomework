@@ -70,7 +70,7 @@ const Teachers = ({ teachers }) => {
   console.log(loc);
   return (
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
-      <Grid item xs={12} sm={12} lg={12}>
+      <Grid item xs={10} sm={110} lg={10}>
         <Typography variant="h5" component="h2">
           TEACHERS
         </Typography>

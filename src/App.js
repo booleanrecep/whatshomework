@@ -27,7 +27,7 @@ import { schoolsData } from "./data";
 const styles = (theme) => ({
   absolute: {
     position: "fixed",
-    bottom: theme.spacing(3),
+    bottom: theme.spacing(12),
     right: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       // display: "none",
@@ -226,9 +226,9 @@ class App extends React.Component {
               {this.state.data.schools.map(({ name, image }) => {
                 return (
                   <Route exact path={`/schools/${name}`}>
-                    <Appbar header={name} />
-                    <Grid container spacing={2} style={{ marginTop: "5em" }}>
-                      <Grid item xs={12} sm={12} lg={12}>
+                    <Appbar INNER_WIDTH={INNER_WIDTH} header={name}/>
+                    {/* <Grid container spacing={2} style={{ marginTop: "5em" }}> */}
+                      <Grid item xs={10} sm={10} lg={10}>
                         <Paper
                           variant="outlined"
                           elevation={3}
@@ -244,16 +244,10 @@ class App extends React.Component {
                             <Typography variant="h5" component="h2">
                               {`WELLCOME TO ${name} COLLEGE`}
                             </Typography>
-                            {/* <Typography
-                              variant="subtitle1"
-                              color="textSecondary"
-                            >
-                              {`${branch}`}
-                            </Typography> */}
                           </div>
                         </Paper>
                       </Grid>
-                    </Grid>
+                    {/* </Grid> */}
 
                     <Teachers
                       teachers={this.state.data.teachers.filter(
@@ -315,7 +309,7 @@ class App extends React.Component {
                 ({ school, name, image, teachers, homeworks }) => {
                   return (
                     <Route path={`/schools/${school}/${name}`}>
-                      <Appbar header={school + "-" + name} />
+                      <Appbar  header={school + "-" + name} />
                       <Teachers
                         teachers={this.state.data.teachers.filter((teacher) =>
                           teachers.includes(teacher.teacherID)

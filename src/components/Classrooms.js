@@ -70,7 +70,7 @@ const Classrooms = ({ classrooms }) => {
   console.log(loc);
   return (
     <Grid container spacing={2} style={{ marginTop: "1em" }}>
-      <Grid item xs={12}>
+      <Grid item xs={10}>
         <Typography variant="h5" component="h2">
           CLASSROOMS
         </Typography>
