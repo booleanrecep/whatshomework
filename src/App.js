@@ -203,7 +203,7 @@ class App extends React.Component {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
 
     return (
-      <Router>
+      <Router >
         <div>
           {/* Helmet */}
           <Seo />
@@ -227,8 +227,8 @@ class App extends React.Component {
                 return (
                   <Route exact path={`/schools/${name}`}>
                     <Appbar INNER_WIDTH={INNER_WIDTH} header={name}/>
-                    {/* <Grid container spacing={2} style={{ marginTop: "5em" }}> */}
-                      <Grid item xs={10} sm={10} lg={10}>
+                    <Grid container spacing={2} style={{ marginTop: "5em" }}>
+                      <Grid item xs={12} sm={12} lg={12}  >
                         <Paper
                           variant="outlined"
                           elevation={3}
@@ -236,10 +236,12 @@ class App extends React.Component {
                             display: "flex",
                             flexDirection: "column",
                             height: "10em",
-                            textAlign: "center",
+                            textAlign: "center",                          
+                            
                           }}
                         >
-                          <CardMedia style={{ padding: "5em" }} image={image} />
+                          <CardMedia style={{ padding: "5em"}} image={image} />
+
                           <div>
                             <Typography variant="h5" component="h2">
                               {`WELLCOME TO ${name} COLLEGE`}
@@ -247,7 +249,7 @@ class App extends React.Component {
                           </div>
                         </Paper>
                       </Grid>
-                    {/* </Grid> */}
+                    </Grid>
 
                     <Teachers
                       teachers={this.state.data.teachers.filter(

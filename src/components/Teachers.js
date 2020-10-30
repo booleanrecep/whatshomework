@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: "10em",
-    width: "14em",
+    // width: "14em",
   },
   button: {
     width: "15em",
@@ -70,14 +70,14 @@ const Teachers = ({ teachers }) => {
   console.log(loc);
   return (
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
-      <Grid item xs={10} sm={110} lg={10}>
+      <Grid item xs={10} sm={10} lg={10}>
         <Typography variant="h5" component="h2">
           TEACHERS
         </Typography>
       </Grid>
-      {teachers.map(({ name, photo, branch,school }) => {
+      {teachers.map(({ name, photo, branch,school,teacherID }) => {
         return (
-          <Grid item xs={6} sm={4} lg={3}>
+          <Grid item xs={6} sm={4} lg={3} key={teacherID}>
             <Paper
               variant="outlined"
               elevation={3}
@@ -90,7 +90,7 @@ const Teachers = ({ teachers }) => {
                 </Avatar>
               </Link>
               <div>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h6" >
                   {name}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">

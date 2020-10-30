@@ -42,7 +42,7 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme} key={47}>
     {/* <App data={data} />, */}
     <App data={dummyData} />,
 

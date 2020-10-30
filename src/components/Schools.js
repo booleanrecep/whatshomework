@@ -65,11 +65,11 @@ const Schools = ({schools}) => {
   console.log(match);
   return (
     <Grid container spacing={2} style={{ marginTop: "4em" }}>
-      {schools.map(({ image, name }) => {
+      {schools.map(({ image, name,schoolId }) => {
         return (
           <>
             {/* <Link to={`${match.url}/${school}`}> */}
-              <Grid item xs={6} sm={3} lg={4}>
+              <Grid item xs={6} sm={3} lg={4} key={schoolId}>
                 <Paper variant="outlined" elevation={3} style={{textAlign:"center"}}>
                   <CardMedia className={classes.media} image={image} />
                   <Button

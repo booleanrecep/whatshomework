@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Homework = ({ homeworks }) => {
+const Homeworks= ({ homeworks }) => {
   const classes = useStyles();
   const [fav, setFav] = React.useState({ favColor: "", favNum: "0" });
   const today = new TrDate();
@@ -58,7 +58,7 @@ const Homework = ({ homeworks }) => {
           school,
         }) => {
           return (
-            <Grid item xs={12} sm={4} lg={3}>
+            <Grid item xs={12} sm={4} lg={3} key={homeworkID}>
               <Card>
                 <CardHeader
                   avatar={
@@ -177,4 +177,4 @@ const Homework = ({ homeworks }) => {
     </Grid>
   );
 };
-export default Homework;
+export default Homeworks;

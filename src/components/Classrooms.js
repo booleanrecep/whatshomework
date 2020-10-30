@@ -37,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: "10em",
-    width: "14em",
+    // width: "14em",
   },
   button: {
-    width: "15em",
+    // width: "15em",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -69,15 +69,15 @@ const Classrooms = ({ classrooms }) => {
   const loc = useLocation();
   console.log(loc);
   return (
-    <Grid container spacing={2} style={{ marginTop: "1em" }}>
+    <Grid container spacing={2} style={{ marginTop: "5em" }}>
       <Grid item xs={10}>
         <Typography variant="h5" component="h2">
           CLASSROOMS
         </Typography>
       </Grid>
-      {classrooms.map(({ name, image,school }) => {
+      {classrooms.map(({ name, image,school,classroomID }) => {
         return (
-          <Grid item xs={6} sm={4} lg={3}>
+          <Grid item xs={6} sm={4} lg={3} key={classroomID}>
             <Paper variant="outlined" elevation={3}>
               <Link to={`/schools/${school}/${name}`} style={{textDecoration:"none"}}>
                 <Avatar aria-label="recipe" className={classes.avatar} style={{ margin: "1em" }}>
