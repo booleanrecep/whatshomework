@@ -75,7 +75,7 @@ const Teachers = ({ teachers }) => {
           TEACHERS
         </Typography>
       </Grid>
-      {teachers.map(({ name, photo, branch,school,teacherID }) => {
+      {teachers.map(({ name, photo, branch, school, teacherID }) => {
         return (
           <Grid item xs={6} sm={4} lg={3} key={teacherID}>
             <Paper
@@ -84,15 +84,16 @@ const Teachers = ({ teachers }) => {
               style={{ display: "flex", flexDirection: "row" }}
             >
               {/* <CardMedia className={classes.media} image={photo} /> */}
-              <Link to={`/schools/${school}/${name}`} style={{textDecoration:"none"}}>
-                <Avatar className={classes.large} src={photo} >
-                    {name}
+              <Link
+                to={`/schools/${school}/${name}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Avatar className={classes.large} src={photo}>
+                  {name}
                 </Avatar>
               </Link>
               <div>
-                <Typography variant="h6" >
-                  {name}
-                </Typography>
+                <Typography variant="h6">{name}</Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                   {`${branch}`}
                 </Typography>

@@ -23,11 +23,11 @@ import Schools from "./components/Schools";
 import Teachers from "./components/Teachers";
 import Classrooms from "./components/Classrooms";
 import { schoolsData } from "./data";
-
+import Branches from "./components/Branches";
 const styles = (theme) => ({
   absolute: {
     position: "fixed",
-    bottom: theme.spacing(12),
+    bottom: theme.spacing(10),
     right: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       // display: "none",
@@ -203,7 +203,7 @@ class App extends React.Component {
     const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
 
     return (
-      <Router >
+      <Router>
         <div>
           {/* Helmet */}
           <Seo />
@@ -226,9 +226,9 @@ class App extends React.Component {
               {this.state.data.schools.map(({ name, image }) => {
                 return (
                   <Route exact path={`/schools/${name}`}>
-                    <Appbar INNER_WIDTH={INNER_WIDTH} header={name}/>
+                    <Appbar INNER_WIDTH={INNER_WIDTH} header={name} />
                     <Grid container spacing={2} style={{ marginTop: "5em" }}>
-                      <Grid item xs={12} sm={12} lg={12}  >
+                      <Grid item xs={12} sm={12} lg={12}>
                         <Paper
                           variant="outlined"
                           elevation={3}
@@ -236,11 +236,10 @@ class App extends React.Component {
                             display: "flex",
                             flexDirection: "column",
                             height: "10em",
-                            textAlign: "center",                          
-                            
+                            textAlign: "center",
                           }}
                         >
-                          <CardMedia style={{ padding: "5em"}} image={image} />
+                          <CardMedia style={{ padding: "5em" }} image={image} />
 
                           <div>
                             <Typography variant="h5" component="h2">
@@ -261,6 +260,12 @@ class App extends React.Component {
                         (classroom) => classroom.school === name
                       )}
                     />
+                    <Branches
+                      branches={this.state.data.branches.filter(
+                        (branch) => branch.school === name
+                      )}
+                    />
+
                     <Link to="/schools">
                       <Tooltip
                         title="Anasayfa"
@@ -311,7 +316,7 @@ class App extends React.Component {
                 ({ school, name, image, teachers, homeworks }) => {
                   return (
                     <Route path={`/schools/${school}/${name}`}>
-                      <Appbar  header={school + "-" + name} />
+                      <Appbar header={school + "-" + name} />
                       <Teachers
                         teachers={this.state.data.teachers.filter((teacher) =>
                           teachers.includes(teacher.teacherID)

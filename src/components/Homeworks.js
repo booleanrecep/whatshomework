@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Homeworks= ({ homeworks }) => {
+const Homeworks = ({ homeworks }) => {
   const classes = useStyles();
   const [fav, setFav] = React.useState({ favColor: "", favNum: "0" });
   const today = new TrDate();
@@ -56,6 +56,7 @@ const Homeworks= ({ homeworks }) => {
           topic,
           task,
           school,
+          branch,
         }) => {
           return (
             <Grid item xs={12} sm={4} lg={3} key={homeworkID}>
@@ -80,15 +81,18 @@ const Homeworks= ({ homeworks }) => {
                             end > today.getFullDate(".") ? "green" : "grey",
                         }}
                       />
-                      <Typography
+                      <div
                         style={{
-                          marginTop: "-1.8em",
+                          marginTop: "-2.5em",
                         }}
-                        variant="body1"
-                        color="textPrimary"
                       >
-                        {topic}
-                      </Typography>
+                        <Typography variant="subtitle2" color="textPrimary">
+                          {branch}
+                        </Typography>
+                        <Typography variant="body2" color="textPrimary">
+                          {topic}
+                        </Typography>
+                      </div>
                     </div>
                   }
                 />

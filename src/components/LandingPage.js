@@ -13,8 +13,7 @@ import { Link, useHistory } from "react-router-dom";
 import CanvasDraw from "react-canvas-draw";
 import mountains from "../images/imgs/mountaines.png";
 import { assets } from "../images/svg/ecology/index";
-import Schools from "./Schools"
-
+import Schools from "./Schools";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -25,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
   odevler: {
     position: "absolute",
-    top: "4em",
+    top: "5em",
     left: "45%",
     zIndex: "10",
     [theme.breakpoints.down("sm")]: {
-      top: "3.5em",
+      top: "4em",
       left: "30%",
     },
   },
@@ -41,7 +40,7 @@ const LandingPage = () => {
   let history = useHistory();
   return (
     <Grid container>
-    {/* <Schools school="OKULLARI GÖR"/> */}
+      {/* <Schools school="OKULLARI GÖR"/> */}
       <Grid item xs={12} sm={12} lg={12}>
         <AppBar position="fixed">
           <Toolbar style={{ justifyContent: "center", textAlign: "center" }}>
@@ -53,7 +52,7 @@ const LandingPage = () => {
               </Typography>
             ) : (
               <Typography className={classes.title} variant="body1" noWrap>
-              FOR TEACHERS AND STUDENTS - HOMEWORK FOLLOW APP
+                FOR TEACHERS AND STUDENTS - HOMEWORK FOLLOW APP
               </Typography>
             )}
             <Link to="/schools">

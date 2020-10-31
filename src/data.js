@@ -28,15 +28,14 @@ const atasozleri = [
   },
 ];
 const objects = {
-  branchs:[
+  branchs: [
     {
-      branchID:"",
-      name:"",
-      teacher:"",
-      homeworks:[],
-      lessons:[]
-    }
-
+      branchID: "",
+      name: "",
+      teacher: "",
+      homeworks: [],
+      lessons: [],
+    },
   ],
   schools: [
     {
@@ -84,64 +83,115 @@ const objects = {
   ],
 };
 const dummyData = {
-  branchs:[
+  branches: [
     {
-      name:"Turkish Literature",
-      school:"FT",
-      branchID:"branch01",
-      teacher:"Recep",
-      homeworks:["homework01","homework03"],
-      lessons:[]
+      name: "Turkish Literature",
+      school: "FT",
+      branchID: "branch01",
+      teacher: "Recep",
+      homeworks: ["homework01", "homework03"],
+      lessons: [],
     },
     {
-      name:"English Literature",
-      school:"FT",
-      branchID:"branch02",
-      teacher:"Jhon",
-      homeworks:["homework02","homework4"],
-      lessons:[]
+      name: "English Literature",
+      school: "FT",
+      branchID: "branch02",
+      teacher: "Jhon",
+      homeworks: ["homework02", "homework4"],
+      lessons: [],
     },
     {
-      name:"Science",
-      school:"FT",
-      branchID:"branch03",
-      teacher:"Marco",
-      homeworks:["homework05","homework07"],
-      lessons:[]
+      name: "Science",
+      school: "FT",
+      branchID: "branch03",
+      teacher: "Marco",
+      homeworks: ["homework05", "homework07"],
+      lessons: [],
     },
-    
-    {
-      name:"Technology",
-      school:"FT",
-      branchID:"branch04",
-      teacher:"Marcello",
-      homeworks:["homework06","homewrok08"],
-      lessons:[]
-    }
 
+    {
+      name: "Technology",
+      school: "FT",
+      branchID: "branch04",
+      teacher: "Marcello",
+      homeworks: ["homework06", "homework08"],
+      lessons: [],
+    },
+    ////////
+    {
+      name: "Turkish Literature",
+      school: "DNE",
+      branchID: "branch05",
+      teacher: "Hasan",
+      homeworks: ["homework01", "homework03"],
+      lessons: [],
+    },
+    {
+      name: "English Literature",
+      school: "DNE",
+      branchID: "branch06",
+      teacher: "Hüseyin",
+      homeworks: ["homework02", "homework4"],
+      lessons: [],
+    },
+    {
+      name: "Science",
+      school: "DNE",
+      branchID: "branch07",
+      teacher: "Fatma",
+      homeworks: ["homework05", "homework07"],
+      lessons: [],
+    },
 
+    {
+      name: "Technology",
+      school: "DNE",
+      branchID: "branch08",
+      teacher: "Şaziye",
+      homeworks: ["homework06", "homework08"],
+      lessons: [],
+    },
+    //////
   ],
   schools: [
     {
       schoolID: "school01",
       image: "",
       name: "FT",
-      teachers: ["theacher01","teacher02","teacher03","teacher04"],
+      teachers: ["theacher01", "teacher02", "teacher03", "teacher04"],
       students: [],
-      branches:["branches01","branches02","branches03","branches04"],
-      classrooms: ["classroom01","classroom02"],
-      homeworks: ["homework01","homework02","homework03","homework04","homework05","homework06","homework07","homework08"],
+      branches: ["branches01", "branches02", "branches03", "branches04"],
+      classrooms: ["classroom01", "classroom02"],
+      homeworks: [
+        "homework01",
+        "homework02",
+        "homework03",
+        "homework04",
+        "homework05",
+        "homework06",
+        "homework07",
+        "homework08",
+      ],
     },
     {
       schoolID: "school02",
       image: "",
       name: "DNE",
-      teachers: ["theacher05","teacher06","teacher07","teacher08"],
-      branches:["branches01","branches02","branches03","branches04"],
+      teachers: ["theacher05", "teacher06", "teacher07", "teacher08"],
+      branches: ["branches05", "branches06", "branches07", "branches08"],
       students: [],
-      classrooms: ["classroom03","classroom04"],
-      homeworks: ["homework01","homework02","homework03","homework04","homework05","homework06","homework07","homework08"],
-    }
+      classrooms: ["classroom03", "classroom04"],
+      homeworks: [
+        "homework01",
+        "homework02",
+        "homework03",
+        "homework04",
+        "homework05",
+        "homework06",
+        "homework07",
+        "homework08",
+      ],
+    },
   ],
   teachers: [
     {
@@ -150,8 +200,8 @@ const dummyData = {
       school: "FT",
       photo: "",
       branch: "Turkish Literature",
-      homeworks: ["homework01","homework03"],
-      classrooms: ["classroom01","classroom02","classroom03","classroom04"],
+      homeworks: ["homework01", "homework03"],
+      classrooms: ["classroom01", "classroom02", "classroom03", "classroom04"],
     },
     {
       teacherID: "teacher02",
@@ -159,8 +209,8 @@ const dummyData = {
       school: "FT",
       photo: "",
       branch: "English Literature",
-      homeworks: ["homework02","homework04"],
-      classrooms: ["classroom01","classroom02","classroom03","classroom04"],
+      homeworks: ["homework02", "homework04"],
+      classrooms: ["classroom01", "classroom02", "classroom03", "classroom04"],
     },
     {
       teacherID: "teacher03",
@@ -168,8 +218,8 @@ const dummyData = {
       school: "FT",
       photo: "",
       branch: "Science",
-      homeworks: ["homewrok05","homework07"],
-      classrooms: ["classroom01","classroom02","classroom03","classroom04"],
+      homeworks: ["homewrok05", "homework07"],
+      classrooms: ["classroom01", "classroom02", "classroom03", "classroom04"],
     },
     {
       teacherID: "teacher04",
@@ -177,8 +227,8 @@ const dummyData = {
       school: "FT",
       photo: "",
       branch: "Technology",
-      homeworks: ["homework06","homework08"],
-      classrooms: ["classroom01","classroom02","classroom03","classroom04"],
+      homeworks: ["homework06", "homework08"],
+      classrooms: ["classroom01", "classroom02", "classroom03", "classroom04"],
     },
     /////
     {
@@ -187,8 +237,8 @@ const dummyData = {
       school: "DNE",
       photo: "",
       branch: "Turkish Literature",
-      homeworks: ["homework01","homework03"],
-      classrooms: ["classroom05","classroom06","classroom07","classroom08"],
+      homeworks: ["homework01", "homework03"],
+      classrooms: ["classroom05", "classroom06", "classroom07", "classroom08"],
     },
     {
       teacherID: "teacher06",
@@ -196,8 +246,8 @@ const dummyData = {
       school: "DNE",
       photo: "",
       branch: "English Literature",
-      homeworks: ["homework02","homework04"],
-      classrooms: ["classroom05","classroom06","classroom07","classroom08"],
+      homeworks: ["homework02", "homework04"],
+      classrooms: ["classroom05", "classroom06", "classroom07", "classroom08"],
     },
     {
       teacherID: "teacher07",
@@ -205,8 +255,8 @@ const dummyData = {
       school: "DNE",
       photo: "",
       branch: "Science",
-      homeworks: ["homewrok05","homework07"],
-      classrooms: ["classroom05","classroom06","classroom07","classroom08"],
+      homeworks: ["homewrok05", "homework07"],
+      classrooms: ["classroom05", "classroom06", "classroom07", "classroom08"],
     },
     {
       teacherID: "teacher08",
@@ -214,92 +264,92 @@ const dummyData = {
       school: "DNE",
       photo: "",
       branch: "Technology",
-      homeworks: ["homework06","homework08"],
-      classrooms: ["classroom05","classroom06","classroom07","classroom08"],
+      homeworks: ["homework06", "homework08"],
+      classrooms: ["classroom05", "classroom06", "classroom07", "classroom08"],
     },
   ],
 
   classrooms: [
     {
-      school:"FT",
+      school: "FT",
       name: "5-A",
       image: "",
       classroomID: "classroom01",
-      teachers: ["teacher01","teacher02","teacher03","teacher04"],
+      teachers: ["teacher01", "teacher02", "teacher03", "teacher04"],
       students: [],
       homeworks: ["homework01"],
     },
     {
-      school:"FT",
+      school: "FT",
       name: "5-B",
       image: "",
       classroomID: "classroom02",
-      teachers: ["teacher01","teacher02","teacher03","teacher04"],
+      teachers: ["teacher01", "teacher02", "teacher03", "teacher04"],
       students: [],
       homeworks: ["homework02"],
     },
     {
-      school:"FT",
+      school: "FT",
       name: "6-B",
       image: "",
       classroomID: "classroom03",
-      teachers: ["teacher01","teacher02","teacher03","teacher04"],
+      teachers: ["teacher01", "teacher02", "teacher03", "teacher04"],
       students: [],
       homeworks: ["homework03"],
     },
     {
-      school:"FT",
+      school: "FT",
       name: "8-A",
       image: "",
       classroomID: "classroom04",
-      teachers: ["teacher01","teacher02","teacher03","teacher04"],
+      teachers: ["teacher01", "teacher02", "teacher03", "teacher04"],
       students: [],
       homeworks: ["homework04"],
     },
     {
-      school:"DNE",
+      school: "DNE",
       name: "7-A",
       image: "",
       classroomID: "classroom05",
-      teachers: ["teacher05","teacher06","teacher07","teacher08"],
+      teachers: ["teacher05", "teacher06", "teacher07", "teacher08"],
       students: [],
       homeworks: ["homework05"],
     },
     {
-      school:"DNE",
+      school: "DNE",
       name: "7-B",
       image: "",
       classroomID: "classroom06",
-      teachers: ["teacher05","teacher06","teacher07","teacher08"],
+      teachers: ["teacher05", "teacher06", "teacher07", "teacher08"],
       students: [],
       homeworks: ["homework06"],
     },
     {
-      school:"DNE",
+      school: "DNE",
       name: "7-C",
       image: "",
       classroomID: "classroom07",
-      teachers: ["teacher05","teacher06","teacher07","teacher08"],
+      teachers: ["teacher05", "teacher06", "teacher07", "teacher08"],
       students: [],
       homeworks: ["homework07"],
     },
     {
-      school:"DNE",
+      school: "DNE",
       name: "7-D",
       image: "",
       classroomID: "classroom08",
-      teachers: ["teacher05","teacher06","teacher07","teacher08"],
+      teachers: ["teacher05", "teacher06", "teacher07", "teacher08"],
       students: [],
       homeworks: ["homework08"],
     },
   ],
   homeworks: [
     {
-      school:"FT",
-      classroom:"5-A",
+      school: "FT",
+      classroom: "5-A",
       homeworkID: "homework01",
       teacher: "Recep",
-      branch:"Turkish Literature",
+      branch: "Turkish Literature",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "Memleket İsterim",
@@ -308,11 +358,11 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"FT",
-      classroom:"6-B",
+      school: "FT",
+      classroom: "6-B",
       homeworkID: "homework03",
       teacher: "Recep",
-      branch:"Turkish Literature",
+      branch: "Turkish Literature",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "Peirli El",
@@ -321,11 +371,11 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"FT",
-      classroom:"5-B",
+      school: "FT",
+      classroom: "5-B",
       homeworkID: "homework02",
       teacher: "Jhon",
-      branch:"English Literature",
+      branch: "English Literature",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "How to be ok?",
@@ -334,11 +384,11 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"FT",
-      classroom:"8-A",
+      school: "FT",
+      classroom: "8-A",
       homeworkID: "homework04",
       teacher: "Jhon",
-      branch:"English Literature",
+      branch: "English Literature",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "What is the time?",
@@ -346,13 +396,13 @@ const dummyData = {
       image: "",
       imageTitle: "",
     },
-    
+
     {
-      school:"DNE",
-      classroom:"7-A",
+      school: "DNE",
+      classroom: "7-A",
       homeworkID: "homework05",
       teacher: "Marco",
-      branch:"Science",
+      branch: "Science",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "Discover the earth!",
@@ -361,11 +411,11 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"DNE",
-      classroom:"7-C",
+      school: "DNE",
+      classroom: "7-C",
       homeworkID: "homework07",
       teacher: "Marco",
-      branch:"Science",
+      branch: "Science",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "Explore the fire!",
@@ -374,11 +424,11 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"DNE",
-      classroom:"7-B",
+      school: "DNE",
+      classroom: "7-B",
       homeworkID: "homework06",
       teacher: "Marcello",
-      branch:"Technology",
+      branch: "Technology",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "How to make technology?",
@@ -387,11 +437,11 @@ const dummyData = {
       imageTitle: "",
     },
     {
-      school:"DNE",
-      classroom:"7-D",
+      school: "DNE",
+      classroom: "7-D",
       homeworkID: "homework08",
       teacher: "Marcello",
-      branch:"Technology",
+      branch: "Technology",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "What is coding?",
@@ -435,7 +485,7 @@ const schoolsData = {
           homeworks: [
             {
               homeworkID: "",
-              teacher:"",
+              teacher: "",
               start: `${tr.getFullDate(".")}`,
               end: `${tr.getFullDate(".")}`,
               topic: "Mustafa Kemal'in Kağnısı",
@@ -452,7 +502,7 @@ const schoolsData = {
           homeworks: [
             {
               homeworkID: "",
-              teacher:"",
+              teacher: "",
               start: `${tr.getFullDate(".")}`,
               end: `${tr.getFullDate(".")}`,
               topic: "Mustafa Kemal'in Kağnısı",
@@ -469,7 +519,7 @@ const schoolsData = {
           homeworks: [
             {
               homeworkID: "",
-              teacher:"",
+              teacher: "",
               start: `${tr.getFullDate(".")}`,
               end: `${tr.getFullDate(".")}`,
               topic: "Mustafa Kemal'in Kağnısı",
@@ -486,7 +536,7 @@ const schoolsData = {
           homeworks: [
             {
               homeworkID: "",
-              teacher:"",
+              teacher: "",
               start: `${tr.getFullDate(".")}`,
               end: `${tr.getFullDate(".")}`,
               topic: "Mustafa Kemal'in Kağnısı",
@@ -497,7 +547,7 @@ const schoolsData = {
           ],
         },
       ],
-      students:[]
+      students: [],
     },
     {
       schoolID: "",
@@ -510,8 +560,8 @@ const schoolsData = {
           photo: assets.a5,
           name: "Recep",
           branch: "Turksih Literature",
-          homeworks:[],
-          classrooms:[]
+          homeworks: [],
+          classrooms: [],
         },
         {
           teacherID: "",
@@ -520,8 +570,8 @@ const schoolsData = {
           photo: assets.a4,
           name: "Cansu",
           branch: "Math",
-          homeworks:[],
-          classroom:[]
+          homeworks: [],
+          classroom: [],
         },
       ],
       classrooms: [
@@ -688,4 +738,4 @@ const data = [
   },
 ];
 
-export { atasozleri, data, schoolsData,dummyData };
+export { atasozleri, data, schoolsData, dummyData };

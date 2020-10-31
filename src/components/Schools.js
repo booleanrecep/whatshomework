@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 const INNER_WIDTH = window.outerWidth;
 
-const Schools = ({schools}) => {
+const Schools = ({ schools }) => {
   const classes = useStyles();
   let history = useHistory();
   const match = useRouteMatch();
@@ -65,26 +65,29 @@ const Schools = ({schools}) => {
   console.log(match);
   return (
     <Grid container spacing={2} style={{ marginTop: "4em" }}>
-      {schools.map(({ image, name,schoolId }) => {
+      {schools.map(({ image, name, schoolId }) => {
         return (
           <>
             {/* <Link to={`${match.url}/${school}`}> */}
-              <Grid item xs={6} sm={3} lg={4} key={schoolId}>
-                <Paper variant="outlined" elevation={3} style={{textAlign:"center"}}>
-                  <CardMedia className={classes.media} image={image} />
-                  <Button
-                    onClick={() => history.push(`${match.url}/${name}`)}
-                    size="large"
-                    variant="contained"
-                    color="secondary"
-                    className={classes.button}
-                  >
-                    {`${name} COLLEGE`}
-                  </Button>
-                </Paper>
-              </Grid>
+            <Grid item xs={6} sm={3} lg={4} key={schoolId}>
+              <Paper
+                variant="outlined"
+                elevation={3}
+                style={{ textAlign: "center" }}
+              >
+                <CardMedia className={classes.media} image={image} />
+                <Button
+                  onClick={() => history.push(`${match.url}/${name}`)}
+                  size="large"
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                >
+                  {`${name} COLLEGE`}
+                </Button>
+              </Paper>
+            </Grid>
             {/* </Link> */}
-            
           </>
         );
       })}

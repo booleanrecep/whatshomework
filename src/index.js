@@ -7,7 +7,7 @@ import green from "@material-ui/core/colors/green";
 import { data } from "./data";
 import { schoolsData } from "./data";
 import { dummyData } from "./data";
-console.log(dummyData)
+console.log(dummyData);
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -45,7 +45,6 @@ ReactDOM.render(
   <ThemeProvider theme={theme} key={47}>
     {/* <App data={data} />, */}
     <App data={dummyData} />,
-
   </ThemeProvider>,
   document.getElementById("root")
 );

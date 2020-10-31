@@ -8,7 +8,7 @@ import {
   IconButton,
   Avatar,
   makeStyles,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
@@ -32,13 +32,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked ,header}) => {
+const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked, header }) => {
   const classes = useStyles();
   return (
     <>
       <PopCretaed checked={checked} />
-      <AppBar position="fixed" >
-        <Toolbar >
+      <AppBar position="fixed">
+        <Toolbar>
           <Link to="/">
             <IconButton
               edge="start"
@@ -54,7 +54,7 @@ const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked ,header}) => {
           </Link>
           {INNER_WIDTH <= 499 ? (
             <Typography className={classes.title} variant="h6" noWrap>
-            {header}
+              {header}
               {/* <br />
               ... HOCA */}
               <Tooltip
@@ -70,8 +70,8 @@ const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked ,header}) => {
             </Typography>
           ) : (
             <Typography className={classes.title} variant="h6" noWrap>
-            {header}
-              <Tooltip 
+              {header}
+              <Tooltip
                 title="Yeni Ödev Oluştur"
                 aria-label="yeni-odev"
                 className={classes.absoluteTop}
@@ -85,7 +85,7 @@ const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked ,header}) => {
           )}
         </Toolbar>
       </AppBar>
-      </>
+    </>
   );
 };
 
