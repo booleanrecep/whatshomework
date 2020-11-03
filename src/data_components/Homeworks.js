@@ -25,7 +25,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import Calender from "./Calender";
+import Calender from "../ui_components/Calender";
 import TrDate from "tr-date";
 const useStyles = makeStyles((theme) => ({
   avatar: {

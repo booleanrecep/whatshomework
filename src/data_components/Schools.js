@@ -27,8 +27,8 @@ import CanvasDraw from "react-canvas-draw";
 import mountains from "../images/imgs/mountaines.png";
 import { assets } from "../images/svg/ecology/index";
 import { schoolsData } from "../data";
-import Appbar from "./Appbar";
-import DneClass from "./DneClass";
+import DneClass from "../components/DneClass";
+import AddIcon from "@material-ui/icons/Add";
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -37,38 +37,24 @@ const useStyles = makeStyles((theme) => ({
     height: "10em",
     // width: "14em",
   },
-  button: {
-    // width: "15em",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     display: "block",
-  },
-
-  absoluteTop: {
-    position: "fixed",
-    top: theme.spacing(1.8),
-    right: theme.spacing(3),
   },
 }));
 
 const INNER_WIDTH = window.outerWidth;
 
-const Schools = ({ schools }) => {
+const Schools = ({ schools,handleOpenForm }) => {
   const classes = useStyles();
   let history = useHistory();
   const match = useRouteMatch();
   const params = useParams();
   const loc = useLocation();
-  console.log(match);
   return (
     <Grid container spacing={2} style={{ marginTop: "4em" }}>
       {schools.map(({ image, name, schoolId }) => {
         return (
           <>
-            {/* <Link to={`${match.url}/${school}`}> */}
             <Grid item xs={6} sm={3} lg={4} key={schoolId}>
               <Paper
                 variant="outlined"
@@ -81,16 +67,27 @@ const Schools = ({ schools }) => {
                   size="large"
                   variant="contained"
                   color="secondary"
-                  className={classes.button}
                 >
                   {`${name} COLLEGE`}
                 </Button>
               </Paper>
             </Grid>
-            {/* </Link> */}
           </>
         );
       })}
+      <Grid item xs={6} sm={3} lg={4} key={"a"}>
+        <Paper variant="outlined" elevation={3} style={{ textAlign: "center",height:"12.5em" }}>
+
+          <Tooltip
+            title="Add New School"
+            onClick={handleOpenForm}
+          >
+            <Fab style={{color:"green",marginTop:"5em"}}>
+              <AddIcon style={{width:"2em",height:"2em"}} />
+            </Fab>
+          </Tooltip>
+        </Paper>
+      </Grid>
     </Grid>
   );
 };

@@ -10,25 +10,26 @@ import {
 } from "@material-ui/core";
 import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import TrDate from "tr-date";
-import Draggable from "react-draggable";
-import Appbar from "./components/Appbar";
-import DneClass from "./components/DneClass";
-import Homeworks from "./components/Homeworks";
-import CreateHomework from "./components/CreateHomework";
-import EditHomework from "./components/EditHomework";
+import Appbar from "./ui_components/Appbar";
+// import TrDate from "tr-date";
+// import Draggable from "react-draggable";
+// import DneClass from "./components/DneClass";
+// import { schoolsData } from "./data";
+import Homeworks from "./data_components/Homeworks";
 import Seo from "./components/Seo";
-import LandingPage from "./components/LandingPage";
-import Schools from "./components/Schools";
-import Teachers from "./components/Teachers";
-import Classrooms from "./components/Classrooms";
-import { schoolsData } from "./data";
-import Branches from "./components/Branches";
+import LandingPage from "./ui_components/LandingPage";
+import Schools from "./data_components/Schools";
+import Teachers from "./data_components/Teachers";
+import Classrooms from "./data_components/Classrooms";
+import Branches from "./data_components/Branches";
+import CreateSchool from "./forms/CreateSchool";
+import CreateTeacher from "./forms/CreateTeacher";
 const styles = (theme) => ({
   absolute: {
     position: "fixed",
-    bottom: theme.spacing(10),
+    bottom: theme.spacing(3),
     right: theme.spacing(3),
+    marginTop: theme.spacing(3),
     [theme.breakpoints.up("sm")]: {
       // display: "none",
     },
@@ -69,138 +70,24 @@ class App extends React.Component {
 
     this.state = {
       data: props.data,
-      editState: "",
-      openEdit: false,
-      openCreate: false,
-      activeDrags: 0,
-      checked: false,
+      formIsOpen: false,
     };
-    this.handleClickOpenCreate = this.handleClickOpenCreate.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.onDelete = this.onDelete.bind(this);
-    this.onEditState = this.onEditState.bind(this);
-    this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
-    this.changeDateFormat = this.changeDateFormat.bind(this);
-    // this.handlePopcreated = this.handlePopcreated.bind(this);
+    this.handleOpenForm = this.handleOpenForm.bind(this);
+    this.handleCloseForm = this.handleCloseForm.bind(this);
   }
 
-  handleClickOpenCreate = () => {
-    this.setState({ openCreate: true });
-  };
-
-  handleClose = () => {
-    this.setState({ openCreate: false, openEdit: false });
-  };
-  handlePopcreated = () => {
-    this.setState({ checked: true });
-    setTimeout(() => {
-      this.setState({
-        checked: false,
-      });
-    }, 3000);
-  };
-  changeDateFormat = (date) => {
-    const cd = new TrDate(date);
-    return `${cd.getFullYear()}-${cd.getMonthNum()}-${cd.getDate()}`;
-  };
-
-  onEditState = (e) => {
-    e.preventDefault();
-    const findedClassroom = this.state.data.find(({ homeworks }) =>
-      homeworks.find(({ id }) => id === parseInt(e.target.id))
-    );
-    const findHomework = findedClassroom.homeworks.find(
-      (homework) => parseInt(homework.id) === parseInt(e.target.id)
-    );
-    const baslama = `${findHomework.baslama.substring(
-      6,
-      10
-    )}-${findHomework.baslama.substring(3, 5)}-${findHomework.baslama.substring(
-      0,
-      2
-    )}`;
-    const bitis = `${findHomework.bitis.substring(
-      6,
-      10
-    )}-${findHomework.bitis.substring(3, 5)}-${findHomework.bitis.substring(
-      0,
-      2
-    )}`;
-
+  handleOpenForm = () => {
     this.setState({
-      editState: Object.assign({ ...findHomework }, { baslama, bitis }),
-      openEdit: true,
+      formIsOpen: true,
     });
   };
-  handleChangeEdit = (e) => {
-    e.preventDefault();
-    e.persist();
-
+  handleCloseForm = () => {
     this.setState({
-      editState: {
-        ...this.state.editState,
-        [e.target.name]: e.target.value,
-      },
+      formIsOpen: false,
     });
   };
-
-  handleSubmitEdit = () => {
-    let editedHomework;
-    const newData = this.state.data.map((cls) => {
-      const editedClassroom = cls.homeworks.map((homework) => {
-        editedHomework =
-          parseInt(homework.id) === parseInt(this.state.editState.id)
-            ? ((this.state.editState.baslama = `${this.state.editState.baslama.substring(
-                8,
-                10
-              )}.${this.state.editState.baslama.substring(
-                5,
-                7
-              )}.${this.state.editState.baslama.substring(0, 4)}`),
-              (this.state.editState.bitis = `${this.state.editState.bitis.substring(
-                8,
-                10
-              )}.${this.state.editState.bitis.substring(
-                5,
-                7
-              )}.${this.state.editState.bitis.substring(0, 4)}`),
-              this.state.editState)
-            : homework;
-        return editedHomework;
-      });
-      cls.homeworks = editedClassroom;
-      return cls;
-    });
-    this.setState({
-      data: newData,
-      openEdit: false,
-    });
-  };
-  onDelete = (e) => {
-    e.preventDefault();
-    const targetId = e.target.id;
-    this.setState({
-      data: this.state.data.filter((cls, indx) => {
-        return (cls.homeworks = cls.homeworks.filter(
-          ({ id }) => id != targetId
-        ));
-      }),
-      editState: "",
-    });
-  };
-
-  onStart = () => {
-    this.setState({ activeDrags: ++this.state.activeDrags });
-  };
-
-  onStop = () => {
-    this.setState({ activeDrags: --this.state.activeDrags });
-    return false;
-  };
-
   render() {
     const { classes } = this.props;
-    const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
 
     return (
       <Router>
@@ -218,15 +105,38 @@ class App extends React.Component {
                   header="SCHOOLS"
                   checked={this.state.checked}
                   INNER_WIDTH={INNER_WIDTH}
-                  handleClickOpenCreate={this.handleClickOpenCreate}
                 />
 
-                <Schools schools={this.state.data.schools} />
+                <Schools
+                  schools={this.state.data.schools}
+                  handleOpenForm={this.handleOpenForm}
+                />
+                <CreateSchool
+                  handleCloseForm={this.handleCloseForm}
+                  formIsOpen={this.state.formIsOpen}
+                  schools={this.state.data.schools}
+                />
+              </Route>
+              <Route exact path="/teachers">
+                <Appbar
+                  header="TEACHERS"
+                  checked={this.state.checked}
+                  INNER_WIDTH={INNER_WIDTH}
+                />
+
+                <Teachers
+                  // handleOpenForm={this.handleOpenForm}
+                  showSchool={true}
+                  teachers={this.state.data.teachers}
+                />
               </Route>
               {this.state.data.schools.map(({ name, image }) => {
                 return (
                   <Route exact path={`/schools/${name}`}>
-                    <Appbar INNER_WIDTH={INNER_WIDTH} header={name} />
+                    <Appbar
+                      INNER_WIDTH={INNER_WIDTH}
+                      header={name + " COLLEGE"}
+                    />
                     <Grid container spacing={2} style={{ marginTop: "5em" }}>
                       <Grid item xs={12} sm={12} lg={12}>
                         <Paper
@@ -251,6 +161,7 @@ class App extends React.Component {
                     </Grid>
 
                     <Teachers
+                      // handleOpenForm={this.handleOpenForm}
                       teachers={this.state.data.teachers.filter(
                         (teacher) => teacher.school === name
                       )}
@@ -284,7 +195,7 @@ class App extends React.Component {
                 ({ name, school, photo, branch, homeworks, classrooms }) => {
                   return (
                     <Route path={`/schools/${school}/${name}`}>
-                      <Appbar header={school + "-" + name} />
+                      <Appbar header={school + " COLLEGE " + "- " + name} />
                       <Classrooms
                         classrooms={this.state.data.classrooms.filter(
                           (classroom) =>
@@ -316,8 +227,9 @@ class App extends React.Component {
                 ({ school, name, image, teachers, homeworks }) => {
                   return (
                     <Route path={`/schools/${school}/${name}`}>
-                      <Appbar header={school + "-" + name} />
+                      <Appbar header={school + " COLLEGE " + "- " + name} />
                       <Teachers
+                        handleOpenForm={this.handleOpenForm}
                         teachers={this.state.data.teachers.filter((teacher) =>
                           teachers.includes(teacher.teacherID)
                         )}
@@ -342,100 +254,7 @@ class App extends React.Component {
                   );
                 }
               )}
-
-              {/* <Route exact path="/odevler">
-                <Appbar
-                  checked={this.state.checked}
-                  INNER_WIDTH={INNER_WIDTH}
-                  handleClickOpenCreate={this.handleClickOpenCreate}
-                />
-                <Grid
-                  container
-                  spacing={2}
-                  style={{ marginTop: "5em", marginBottom: "1em" }}
-                >
-                  <DneClass
-                    onEditState={this.onEditState}
-                    onDeleteState={this.onEditState}
-                    state={this.state}
-                  />
-                </Grid>
-                <Grid item xs={12} className={classes.footer}>
-                  <Typography
-                    color="textSecondary"
-                    style={{ position: "absolute", left: "2%" }}
-                  >
-                    {`Hayatta en doğru yol gösterici bilimdir`}
-                  </Typography>
-                  <br />
-                  <Typography
-                    style={{
-                      position: "absolute",
-                      left: "30%",
-                      marginTop: "0.5em",
-                    }}
-                    color="textSecondary"
-                  >
-                    {` Mustafa Kemal Atatürk`}
-                  </Typography>
-                  <Typography
-                    className={classes.copyright}
-                    color="textSecondary"
-                  >
-                    &#xA9; Copyright 2020 Recep ÖZTÜRK
-                  </Typography>
-                </Grid>
-              </Route> */}
-
-              {/* {this.state.data &&
-                this.state.data.map(({ classroom, homeworks }) => {
-                  return (
-                    <Route path={`/odevler/${classroom}`}>
-                      <Appbar
-                        checked={this.state.checked}
-                        INNER_WIDTH={INNER_WIDTH}
-                        handleClickOpenCreate={this.handleClickOpenCreate}
-                      />
-                      <Grid container spacing={2} style={{ marginTop: "5em" }}>
-                        {homeworks &&
-                          homeworks.map((homework) => (
-                            <Homework
-                              onEditState={this.onEditState}
-                              onDeleteState={this.onDelete}
-                              {...homework}
-                            />
-                          ))}
-                        <Draggable {...dragHandlers}>
-                          <Link to="/odevler">
-                            <Tooltip
-                              title="Anasayfa"
-                              aria-label="anasayfa"
-                              className={classes.absolute}
-                            >
-                              <Fab color="secondary">
-                                <ArrowBackIcon />
-                              </Fab>
-                            </Tooltip>
-                          </Link>
-                        </Draggable>
-                      </Grid>
-                    </Route>
-                  );
-                })} */}
             </Switch>
-            {/* <CreateHomework
-              handlePopcreated={this.handlePopcreated}
-              homeworkState={this.state.data}
-              closeIt={this.handleClose}
-              openIt={this.state.openCreate}
-            />
-            <EditHomework
-              editState={this.state.editState}
-              closeIt={this.handleClose}
-              openIt={this.state.openEdit}
-              handleChangeEdit={this.handleChangeEdit}
-              handleSubmitEdit={this.handleSubmitEdit}
-            /> */}
           </Grid>
         </div>
       </Router>

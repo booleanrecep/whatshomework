@@ -32,6 +32,7 @@ const objects = {
     {
       branchID: "",
       name: "",
+      school:"",
       teacher: "",
       homeworks: [],
       lessons: [],
@@ -45,6 +46,8 @@ const objects = {
       teachers: [],
       students: [],
       classrooms: [],
+      branches:[],
+      homeworks:[],
     },
   ],
   teachers: [
@@ -58,9 +61,9 @@ const objects = {
       classrooms: [],
     },
   ],
-
   classrooms: [
     {
+      school:"",
       name: "",
       image: "",
       classroomID: "",
@@ -71,8 +74,11 @@ const objects = {
   ],
   homeworks: [
     {
+      school:"",
+      classroom:"",
       homeworkID: "",
-      teacherID: "",
+      teacher: "",
+      branch:"",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "",
@@ -218,7 +224,7 @@ const dummyData = {
       school: "FT",
       photo: "",
       branch: "Science",
-      homeworks: ["homewrok05", "homework07"],
+      homeworks: [],
       classrooms: ["classroom01", "classroom02", "classroom03", "classroom04"],
     },
     {
@@ -227,7 +233,7 @@ const dummyData = {
       school: "FT",
       photo: "",
       branch: "Technology",
-      homeworks: ["homework06", "homework08"],
+      homeworks: [],
       classrooms: ["classroom01", "classroom02", "classroom03", "classroom04"],
     },
     /////
@@ -237,7 +243,7 @@ const dummyData = {
       school: "DNE",
       photo: "",
       branch: "Turkish Literature",
-      homeworks: ["homework01", "homework03"],
+      homeworks: [],
       classrooms: ["classroom05", "classroom06", "classroom07", "classroom08"],
     },
     {
@@ -246,7 +252,7 @@ const dummyData = {
       school: "DNE",
       photo: "",
       branch: "English Literature",
-      homeworks: ["homework02", "homework04"],
+      homeworks: [],
       classrooms: ["classroom05", "classroom06", "classroom07", "classroom08"],
     },
     {
@@ -401,7 +407,7 @@ const dummyData = {
       school: "DNE",
       classroom: "7-A",
       homeworkID: "homework05",
-      teacher: "Marco",
+      teacher: "Fatma",
       branch: "Science",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
@@ -414,7 +420,7 @@ const dummyData = {
       school: "DNE",
       classroom: "7-C",
       homeworkID: "homework07",
-      teacher: "Marco",
+      teacher: "Fatma",
       branch: "Science",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
@@ -427,7 +433,7 @@ const dummyData = {
       school: "DNE",
       classroom: "7-B",
       homeworkID: "homework06",
-      teacher: "Marcello",
+      teacher: "Şaziye",
       branch: "Technology",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
@@ -440,7 +446,7 @@ const dummyData = {
       school: "DNE",
       classroom: "7-D",
       homeworkID: "homework08",
-      teacher: "Marcello",
+      teacher: "Şaziye",
       branch: "Technology",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,

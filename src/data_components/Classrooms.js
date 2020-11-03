@@ -27,18 +27,19 @@ import CanvasDraw from "react-canvas-draw";
 import mountains from "../images/imgs/mountaines.png";
 import { assets } from "../images/svg/ecology/index";
 import { schoolsData } from "../data";
-import Appbar from "./Appbar";
-import DneClass from "./DneClass";
+import DneClass from "../components/DneClass";
+import { red } from "@material-ui/core/colors";
+
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
   },
   media: {
-    height: "10em",
+    height: "6em",
     // width: "14em",
   },
   button: {
-    width: "15em",
+    // width: "15em",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -46,22 +47,20 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: "block",
   },
+  avatar: {
+    backgroundColor: red[500],
+  },
 
   absoluteTop: {
     position: "fixed",
     top: theme.spacing(1.8),
     right: theme.spacing(3),
   },
-  large: {
-    margin: "0.5em",
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
 }));
 
 const INNER_WIDTH = window.outerWidth;
 
-const Teachers = ({ teachers }) => {
+const Classrooms = ({ classrooms }) => {
   const classes = useStyles();
   let history = useHistory();
   const match = useRouteMatch();
@@ -70,34 +69,32 @@ const Teachers = ({ teachers }) => {
   console.log(loc);
   return (
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
-      <Grid item xs={10} sm={10} lg={10}>
+      <Grid item xs={10}>
         <Typography variant="h5" component="h2">
-          TEACHERS
+          CLASSROOMS
         </Typography>
       </Grid>
-      {teachers.map(({ name, photo, branch, school, teacherID }) => {
+      {classrooms.map(({ name, image, school, classroomID }) => {
         return (
-          <Grid item xs={6} sm={4} lg={3} key={teacherID}>
-            <Paper
-              variant="outlined"
-              elevation={3}
-              style={{ display: "flex", flexDirection: "row" }}
-            >
-              {/* <CardMedia className={classes.media} image={photo} /> */}
+          <Grid item xs={6} sm={4} lg={3} key={classroomID}>
+            <Paper variant="outlined" elevation={3}>
               <Link
                 to={`/schools/${school}/${name}`}
                 style={{ textDecoration: "none" }}
               >
-                <Avatar className={classes.large} src={photo}>
+                <Avatar
+                  aria-label="recipe"
+                  className={classes.avatar}
+                  style={{ margin: "1em" }}
+                >
                   {name}
                 </Avatar>
               </Link>
-              <div>
-                <Typography variant="h6">{name}</Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  {`${branch}`}
-                </Typography>
-              </div>
+
+              <CardMedia className={classes.media} src={image} />
+              {/* <Typography gutterBottom variant="h5" component="h2">
+                {name}
+              </Typography> */}
             </Paper>
           </Grid>
         );
@@ -105,4 +102,4 @@ const Teachers = ({ teachers }) => {
     </Grid>
   );
 };
-export default Teachers;
+export default Classrooms;

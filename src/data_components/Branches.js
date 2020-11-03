@@ -27,10 +27,9 @@ import CanvasDraw from "react-canvas-draw";
 import mountains from "../images/imgs/mountaines.png";
 import { assets } from "../images/svg/ecology/index";
 import { schoolsData } from "../data";
-import Appbar from "./Appbar";
-import DneClass from "./DneClass";
+import DneClass from "../components/DneClass";
 import { red } from "@material-ui/core/colors";
-
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -61,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 const INNER_WIDTH = window.outerWidth;
 
-const Classrooms = ({ classrooms }) => {
+const Branches = ({ branches }) => {
   const classes = useStyles();
   let history = useHistory();
   const match = useRouteMatch();
@@ -72,30 +71,56 @@ const Classrooms = ({ classrooms }) => {
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
       <Grid item xs={10}>
         <Typography variant="h5" component="h2">
-          CLASSROOMS
+          BRANCHES
         </Typography>
       </Grid>
-      {classrooms.map(({ name, image, school, classroomID }) => {
+      {branches.map(({ name, school, branchID, teacher, homeworks }) => {
         return (
-          <Grid item xs={6} sm={4} lg={3} key={classroomID}>
+          <Grid item xs={6} sm={4} lg={3} key={branchID}>
             <Paper variant="outlined" elevation={3}>
-              <Link
-                to={`/schools/${school}/${name}`}
-                style={{ textDecoration: "none" }}
+              <div
+                style={{
+                  textDecoration: "none",
+                  display: "flex",
+                  flexDirection: "row",
+                }}
               >
-                <Avatar
-                  aria-label="recipe"
-                  className={classes.avatar}
-                  style={{ margin: "1em" }}
-                >
+                <MenuBookIcon
+                  fontSize="large"
+                  style={{ margin: "0.5em 0.5em 0.5em 0.5em" }}
+                />
+                <Typography  variant="subtitle1" style={{ margin: "1.5em 0 0 0" }} >
                   {name}
-                </Avatar>
-              </Link>
-
-              <CardMedia className={classes.media} src={image} />
-              {/* <Typography gutterBottom variant="h5" component="h2">
-                {name}
-              </Typography> */}
+                </Typography>
+              </div>
+              <div
+                style={{
+                  textDecoration: "none",
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <Link
+                  to={`/schools/${school}/${teacher}`}
+                  style={{
+                    textDecoration: "none",
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  <Avatar
+                    aria-label="recipe"
+                    src={teacher}
+                    className={classes.avatar}
+                    style={{ margin: "0 0.5em 0.5em 0.7em" }}
+                  >
+                    {teacher}
+                  </Avatar>
+                </Link>
+                <Typography gutterBottom variant="h6" >
+                  {teacher}
+                </Typography>
+              </div>
             </Paper>
           </Grid>
         );
@@ -103,4 +128,4 @@ const Classrooms = ({ classrooms }) => {
     </Grid>
   );
 };
-export default Classrooms;
+export default Branches;

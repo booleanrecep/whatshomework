@@ -55,9 +55,7 @@ const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked, header }) => {
           {INNER_WIDTH <= 499 ? (
             <Typography className={classes.title} variant="h6" noWrap>
               {header}
-              {/* <br />
-              ... HOCA */}
-              <Tooltip
+              {/* <Tooltip
                 title="Yeni Ödev Oluştur"
                 aria-label="yeni-odev"
                 className={classes.absoluteTop}
@@ -66,12 +64,12 @@ const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked, header }) => {
                 <Fab color="secondary">
                   <NoteAddOutlinedIcon />
                 </Fab>
-              </Tooltip>
+              </Tooltip> */}
             </Typography>
           ) : (
             <Typography className={classes.title} variant="h6" noWrap>
               {header}
-              <Tooltip
+              {/* <Tooltip
                 title="Yeni Ödev Oluştur"
                 aria-label="yeni-odev"
                 className={classes.absoluteTop}
@@ -80,7 +78,7 @@ const Appbar = ({ INNER_WIDTH, handleClickOpenCreate, checked, header }) => {
                 <Fab color="secondary">
                   <NoteAddOutlinedIcon />
                 </Fab>
-              </Tooltip>
+              </Tooltip> */}
             </Typography>
           )}
         </Toolbar>
