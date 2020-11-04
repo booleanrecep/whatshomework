@@ -7,7 +7,10 @@ import green from "@material-ui/core/colors/green";
 import { data } from "./data";
 import { schoolsData } from "./data";
 import { dummyData } from "./data";
-console.log(dummyData);
+
+import { Provider } from "react-redux";
+import store from "./redux_files/store/index";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -43,8 +46,10 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <ThemeProvider theme={theme} key={47}>
-    {/* <App data={data} />, */}
-    <App data={dummyData} />,
+    <Provider store={store}>
+      <App />
+    </Provider>
+    ,
   </ThemeProvider>,
   document.getElementById("root")
 );

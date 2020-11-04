@@ -14,6 +14,14 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+
+import {connect} from "react-redux"
+import {addSchool} from "../redux_files/actions/index"
+
+function mapDispatchToProps(dispatch){
+  return {addSchool:school => dispatch(addSchool(school))}
+}
+
 const styles = (theme) => ({
   input: {
     width: "14em",
@@ -61,7 +69,8 @@ class CreateSchool extends React.Component {
   };
 
   handleAddSchool = () => {
-    this.state.schools.push(this.state.newSchool);
+    this.props.addSchool(this.state.newSchool)
+    // this.state.schools.push(this.state.newSchool);
     this.closeForm();
   };
 
@@ -102,5 +111,8 @@ class CreateSchool extends React.Component {
     );
   }
 }
-
-export default withStyles(styles)(CreateSchool);
+const Form = connect(
+  null,
+  mapDispatchToProps
+)(CreateSchool)
+export default withStyles(styles)(Form);

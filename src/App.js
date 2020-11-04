@@ -24,6 +24,13 @@ import Classrooms from "./data_components/Classrooms";
 import Branches from "./data_components/Branches";
 import CreateSchool from "./forms/CreateSchool";
 import CreateTeacher from "./forms/CreateTeacher";
+
+import  {connect} from "react-redux"
+
+const mapStateToProps = state =>{
+  return {data:state.data}
+}
+
 const styles = (theme) => ({
   absolute: {
     position: "fixed",
@@ -262,4 +269,5 @@ class App extends React.Component {
   }
 }
 
-export default withStyles(styles)(App);
+const MappedApp = connect(mapStateToProps)(App)
+export default withStyles(styles)(MappedApp);
