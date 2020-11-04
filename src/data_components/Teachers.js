@@ -136,21 +136,27 @@ const Teachers = ({ teachers, showSchool, handleOpenForm }) => {
           </Grid>
         );
       })}
-      <Grid item xs={6} sm={4} lg={3} key={"n"}>
-        <Paper
-          variant="outlined"
-          elevation={3}
-          style={{ textAlign: "center", height: "8em" }}
-        >
-          <Tooltip title="Add New Teacher"
-          //  onClick={handleOpenForm}
-           >
-            <Fab style={{ color: "green", marginTop: "2em" }}>
-              <AddIcon style={{ width: "2em", height: "2em" }} />
-            </Fab>
-          </Tooltip>
-        </Paper>
-      </Grid>
+      {showSchool === true ? null : (
+        <Grid item xs={6} sm={4} lg={3} key={"n"}>
+          <Paper
+            variant="outlined"
+            elevation={3}
+            style={{
+              textAlign: "center",
+              height: "8em",
+            }}
+          >
+            <Tooltip
+              title="Add New Teacher"
+              //  onClick={handleOpenForm}
+            >
+              <Fab style={{ color: "green", marginTop: "2.5em" }}>
+                <AddIcon style={{ width: "2em", height: "2em" }} />
+              </Fab>
+            </Tooltip>
+          </Paper>
+        </Grid>
+      )}
     </Grid>
   );
 };

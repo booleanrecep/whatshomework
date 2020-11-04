@@ -29,6 +29,7 @@ import { assets } from "../images/svg/ecology/index";
 import { schoolsData } from "../data";
 import DneClass from "../components/DneClass";
 import { red } from "@material-ui/core/colors";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -99,6 +100,18 @@ const Classrooms = ({ classrooms }) => {
           </Grid>
         );
       })}
+      <Grid item xs={6} sm={4} lg={3} key={"c"}>
+        <Paper variant="outlined" elevation={3} style={{ textAlign: "center", height: "11em" }}>
+          <Tooltip
+            title="Add New Classroom"
+            //  onClick={handleOpenForm}
+          >
+            <Fab style={{ color: "green", marginTop: "4em" }}>
+              <AddIcon style={{ width: "2em", height: "2em" }} />
+            </Fab>
+          </Tooltip>
+        </Paper>
+      </Grid>
     </Grid>
   );
 };

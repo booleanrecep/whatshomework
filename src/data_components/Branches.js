@@ -30,6 +30,8 @@ import { schoolsData } from "../data";
 import DneClass from "../components/DneClass";
 import { red } from "@material-ui/core/colors";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
+import AddIcon from "@material-ui/icons/Add";
+
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -125,6 +127,18 @@ const Branches = ({ branches }) => {
           </Grid>
         );
       })}
+      <Grid item xs={6} sm={4} lg={3} key={"b"}>
+        <Paper variant="outlined" elevation={3} style={{ textAlign: "center", height: "7.5em" }}>
+          <Tooltip
+            title="Add New Branch"
+            //  onClick={handleOpenForm}
+          >
+            <Fab style={{ color: "green", marginTop: "2em" }}>
+              <AddIcon style={{ width: "2em", height: "2em" }} />
+            </Fab>
+          </Tooltip>
+        </Paper>
+      </Grid>
     </Grid>
   );
 };
