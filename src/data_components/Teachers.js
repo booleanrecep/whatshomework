@@ -148,7 +148,7 @@ const Teachers = ({ teachers, showSchool, handleOpenForm }) => {
           >
             <Tooltip
               title="Add New Teacher"
-              //  onClick={handleOpenForm}
+               onClick={handleOpenForm}
             >
               <Fab style={{ color: "green", marginTop: "2.5em" }}>
                 <AddIcon style={{ width: "2em", height: "2em" }} />

@@ -23,36 +23,36 @@ const styles = (theme) => ({
   },
 });
 
-class CreateTeacher extends React.Component {
+class CreateClassroom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        teacherID: ``,
-        name:"",
-        branch:"",
-        school:props.schoolName,
-        photo: "",
+        school:this.props.schoolName,
+        name: "",
+        image: "",
+        classroomID: "",
+        teachers: [],
+        students: [],
         homeworks: [],
-        classrooms: [],
     }
-    this.teachers=props.teachers
+    this.classrooms=props.classrooms
     this.handleChange = this.handleChange.bind(this);
-    this.handleAddTeacher = this.handleAddTeacher.bind(this);
+    this.handleAddClassroom= this.handleAddClassroom.bind(this);
     this.closeForm = props.handleCloseForm;
   }
   handleChange = (e) => {
     const ID = Math.floor(Math.random() * 10 + 2);
     e.preventDefault();
     this.setState({
-        teacherID: `teacher${ID}`,
+        branchID: `branch${ID}`,
         [e.target.name]: e.target.value,
        
     });
   };
 
-  handleAddTeacher = () => {
+  handleAddClassroom = () => {
     console.log(this.state)
-    this.teachers.push(this.state);
+    this.classrooms.push(this.state);
     this.closeForm();
   };
 
@@ -61,16 +61,16 @@ class CreateTeacher extends React.Component {
     return (
       <div>
         <Dialog open={formIsOpen} onClose={handleCloseForm}>
-          <DialogTitle>New Teacher</DialogTitle>
+          <DialogTitle>New Branch</DialogTitle>
           <DialogContent>
-            <DialogContentText>Add A New Teacher</DialogContentText>
+            <DialogContentText>Add A New Branch</DialogContentText>
             <FormControl>
               <TextField
                 onChange={this.handleChange}
                 value={this.state.name}
                 margin="dense"
                 name="name"
-                label="Name"
+                label="Classroom"
                 type="text"
                 inputProps={{
                   maxLength: "25",
@@ -88,25 +88,14 @@ class CreateTeacher extends React.Component {
                 }}
                 className={classes.input}
               />
-              <TextField
-                onChange={this.handleChange}
-                value={this.state.branch}
-                margin="dense"
-                name="branch"
-                label="Branch"
-                type="text"
-                inputProps={{
-                  maxLength: "25",
-                }}
-                className={classes.input}
-              />
+              
             </FormControl>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseForm} color="secondary">
               Cancel
             </Button>
-            <Button onClick={this.handleAddTeacher} color="default">
+            <Button onClick={this.handleAddClassroom} color="default">
               Add
             </Button>
           </DialogActions>
@@ -116,4 +105,4 @@ class CreateTeacher extends React.Component {
   }
 }
 
-export default withStyles(styles)(CreateTeacher);
+export default withStyles(styles)(CreateClassroom);

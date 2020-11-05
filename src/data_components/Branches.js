@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 const INNER_WIDTH = window.outerWidth;
 
-const Branches = ({ branches }) => {
+const Branches = ({ branches,handleOpenForm }) => {
   const classes = useStyles();
   let history = useHistory();
   const match = useRouteMatch();
@@ -131,7 +131,7 @@ const Branches = ({ branches }) => {
         <Paper variant="outlined" elevation={3} style={{ textAlign: "center", height: "7.5em" }}>
           <Tooltip
             title="Add New Branch"
-            //  onClick={handleOpenForm}
+             onClick={handleOpenForm}
           >
             <Fab style={{ color: "green", marginTop: "2em" }}>
               <AddIcon style={{ width: "2em", height: "2em" }} />

@@ -23,36 +23,35 @@ const styles = (theme) => ({
   },
 });
 
-class CreateTeacher extends React.Component {
+class CreateBranch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        teacherID: ``,
-        name:"",
-        branch:"",
-        school:props.schoolName,
-        photo: "",
+        name: "",
+        school: this.props.schoolName,
+        branchID: "",
+        teacher: "",
         homeworks: [],
-        classrooms: [],
+        lessons: [],
     }
-    this.teachers=props.teachers
+    this.branches=props.branches
     this.handleChange = this.handleChange.bind(this);
-    this.handleAddTeacher = this.handleAddTeacher.bind(this);
+    this.handleAddBranch = this.handleAddBranch.bind(this);
     this.closeForm = props.handleCloseForm;
   }
   handleChange = (e) => {
     const ID = Math.floor(Math.random() * 10 + 2);
     e.preventDefault();
     this.setState({
-        teacherID: `teacher${ID}`,
+        branchID: `branch${ID}`,
         [e.target.name]: e.target.value,
        
     });
   };
 
-  handleAddTeacher = () => {
+  handleAddBranch = () => {
     console.log(this.state)
-    this.teachers.push(this.state);
+    this.branches.push(this.state);
     this.closeForm();
   };
 
@@ -61,16 +60,16 @@ class CreateTeacher extends React.Component {
     return (
       <div>
         <Dialog open={formIsOpen} onClose={handleCloseForm}>
-          <DialogTitle>New Teacher</DialogTitle>
+          <DialogTitle>New Branch</DialogTitle>
           <DialogContent>
-            <DialogContentText>Add A New Teacher</DialogContentText>
+            <DialogContentText>Add A New Branch</DialogContentText>
             <FormControl>
               <TextField
                 onChange={this.handleChange}
                 value={this.state.name}
                 margin="dense"
                 name="name"
-                label="Name"
+                label="Branch"
                 type="text"
                 inputProps={{
                   maxLength: "25",
@@ -90,10 +89,10 @@ class CreateTeacher extends React.Component {
               />
               <TextField
                 onChange={this.handleChange}
-                value={this.state.branch}
+                value={this.state.teacher}
                 margin="dense"
-                name="branch"
-                label="Branch"
+                name="teacher"
+                label="Teacher"
                 type="text"
                 inputProps={{
                   maxLength: "25",
@@ -106,7 +105,7 @@ class CreateTeacher extends React.Component {
             <Button onClick={handleCloseForm} color="secondary">
               Cancel
             </Button>
-            <Button onClick={this.handleAddTeacher} color="default">
+            <Button onClick={this.handleAddBranch} color="default">
               Add
             </Button>
           </DialogActions>
@@ -116,4 +115,4 @@ class CreateTeacher extends React.Component {
   }
 }
 
-export default withStyles(styles)(CreateTeacher);
+export default withStyles(styles)(CreateBranch);

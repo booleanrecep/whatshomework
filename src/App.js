@@ -24,6 +24,9 @@ import Classrooms from "./data_components/Classrooms";
 import Branches from "./data_components/Branches";
 import CreateSchool from "./forms/CreateSchool";
 import CreateTeacher from "./forms/CreateTeacher";
+import CreateBranch from "./forms/CreateBranch";
+import CreateClassroom from "./forms/CreateClassroom";
+
 const styles = (theme) => ({
   absolute: {
     position: "fixed",
@@ -70,20 +73,59 @@ class App extends React.Component {
 
     this.state = {
       data: props.data,
-      formIsOpen: false,
+      schoolFormIsOpen: false,
+      teacherFormIsOpen: false,
+      branchFormIsOpen: false,
+      classroomFormIsOpen: false,
     };
-    this.handleOpenForm = this.handleOpenForm.bind(this);
-    this.handleCloseForm = this.handleCloseForm.bind(this);
+    this.handleOpenSchoolForm = this.handleOpenSchoolForm.bind(this);
+    this.handleCloseSchoolForm = this.handleCloseSchoolForm.bind(this);
+    this.handleOpenTeacherForm = this.handleOpenTeacherForm.bind(this);
+    this.handleCloseTeacherForm = this.handleCloseTeacherForm.bind(this);
+    this.handleOpenBranchForm = this.handleOpenBranchForm.bind(this);
+    this.handleCloseBranchForm = this.handleCloseBranchForm.bind(this);
+    this.handleOpenClassroomForm = this.handleOpenClassroomForm.bind(this);
+    this.handleCloseClassroomForm = this.handleCloseClassroomForm.bind(this);
   }
 
-  handleOpenForm = () => {
+  handleOpenSchoolForm = () => {
     this.setState({
-      formIsOpen: true,
+      schoolFormIsOpen: true,
     });
   };
-  handleCloseForm = () => {
+  handleCloseSchoolForm = () => {
     this.setState({
-      formIsOpen: false,
+      schoolFormIsOpen: false,
+    });
+  };
+  handleOpenTeacherForm = () => {
+    this.setState({
+      teacherFormIsOpen: true,
+    });
+  };
+  handleCloseTeacherForm = () => {
+    this.setState({
+      teacherFormIsOpen: false,
+    });
+  };
+  handleOpenBranchForm = () => {
+    this.setState({
+      branchFormIsOpen: true,
+    });
+  };
+  handleCloseBranchForm = () => {
+    this.setState({
+      branchFormIsOpen: false,
+    });
+  };
+  handleOpenClassroomForm = () => {
+    this.setState({
+      classroomFormIsOpen: true,
+    });
+  };
+  handleCloseClassroomForm = () => {
+    this.setState({
+      classroomFormIsOpen: false,
     });
   };
   render() {
@@ -109,11 +151,11 @@ class App extends React.Component {
 
                 <Schools
                   schools={this.state.data.schools}
-                  handleOpenForm={this.handleOpenForm}
+                  handleOpenForm={this.handleOpenSchoolForm}
                 />
                 <CreateSchool
-                  handleCloseForm={this.handleCloseForm}
-                  formIsOpen={this.state.formIsOpen}
+                  handleCloseForm={this.handleCloseSchoolForm}
+                  formIsOpen={this.state.schoolFormIsOpen}
                   schools={this.state.data.schools}
                 />
               </Route>
@@ -131,6 +173,7 @@ class App extends React.Component {
                 />
               </Route>
               {this.state.data.schools.map(({ name, image }) => {
+                const schoolName = name;
                 return (
                   <Route exact path={`/schools/${name}`}>
                     <Appbar
@@ -161,20 +204,41 @@ class App extends React.Component {
                     </Grid>
 
                     <Teachers
-                      // handleOpenForm={this.handleOpenForm}
+                      handleOpenForm={this.handleOpenTeacherForm}
                       teachers={this.state.data.teachers.filter(
                         (teacher) => teacher.school === name
                       )}
                     />
+                    <CreateTeacher
+                      schoolName={schoolName}
+                      handleCloseForm={this.handleCloseTeacherForm}
+                      formIsOpen={this.state.teacherFormIsOpen}
+                      teachers={this.state.data.teachers}
+                    />
+                    
                     <Classrooms
+                     handleOpenForm={this.handleOpenClassroomForm}
                       classrooms={this.state.data.classrooms.filter(
                         (classroom) => classroom.school === name
                       )}
                     />
+                    <CreateClassroom
+                      schoolName={schoolName}
+                      handleCloseForm={this.handleCloseClassroomForm}
+                      formIsOpen={this.state.classroomFormIsOpen}
+                      classrooms={this.state.data.classrooms}
+                    />
                     <Branches
+                     handleOpenForm={this.handleOpenBranchForm}
                       branches={this.state.data.branches.filter(
                         (branch) => branch.school === name
                       )}
+                    />
+                    <CreateBranch
+                      schoolName={schoolName}
+                      handleCloseForm={this.handleCloseBranchForm}
+                      formIsOpen={this.state.branchFormIsOpen}
+                      branches={this.state.data.branches}
                     />
 
                     <Link to="/schools">

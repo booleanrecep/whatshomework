@@ -48,7 +48,7 @@ class CreateSchool extends React.Component {
     e.preventDefault();
     this.setState({
       newSchool: {
-        schoolID: ID,
+        schoolID: `school${ID}`,
         image: "",
         name: e.target.value,
         teachers: [],

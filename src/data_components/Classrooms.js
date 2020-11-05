@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 const INNER_WIDTH = window.outerWidth;
 
-const Classrooms = ({ classrooms }) => {
+const Classrooms = ({ classrooms,handleOpenForm }) => {
   const classes = useStyles();
   let history = useHistory();
   const match = useRouteMatch();
@@ -104,7 +104,7 @@ const Classrooms = ({ classrooms }) => {
         <Paper variant="outlined" elevation={3} style={{ textAlign: "center", height: "11em" }}>
           <Tooltip
             title="Add New Classroom"
-            //  onClick={handleOpenForm}
+             onClick={handleOpenForm}
           >
             <Fab style={{ color: "green", marginTop: "4em" }}>
               <AddIcon style={{ width: "2em", height: "2em" }} />
