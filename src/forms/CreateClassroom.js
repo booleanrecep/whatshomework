@@ -14,6 +14,8 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from 'uuid';
+
 const styles = (theme) => ({
   input: {
     width: "14em",
@@ -21,6 +23,7 @@ const styles = (theme) => ({
       width: "18em",
     },
   },
+  
 });
 
 class CreateClassroom extends React.Component {
@@ -41,17 +44,17 @@ class CreateClassroom extends React.Component {
     this.closeForm = props.handleCloseForm;
   }
   handleChange = (e) => {
-    const ID = Math.floor(Math.random() * 10 + 2);
+    const ID =  uuidv4();
     e.preventDefault();
     this.setState({
-        branchID: `branch${ID}`,
+        classroomID: `branch${ID}`,
         [e.target.name]: e.target.value,
        
     });
   };
 
   handleAddClassroom = () => {
-    console.log(this.state)
+
     this.classrooms.push(this.state);
     this.closeForm();
   };
@@ -61,9 +64,9 @@ class CreateClassroom extends React.Component {
     return (
       <div>
         <Dialog open={formIsOpen} onClose={handleCloseForm}>
-          <DialogTitle>New Branch</DialogTitle>
+          <DialogTitle>New Classroom</DialogTitle>
           <DialogContent>
-            <DialogContentText>Add A New Branch</DialogContentText>
+            <DialogContentText>Add A New Classroom</DialogContentText>
             <FormControl>
               <TextField
                 onChange={this.handleChange}

@@ -68,7 +68,6 @@ const Branches = ({ branches,handleOpenForm }) => {
   const match = useRouteMatch();
   const params = useParams();
   const loc = useLocation();
-  console.log(loc);
   return (
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
       <Grid item xs={10}>

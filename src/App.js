@@ -210,6 +210,7 @@ class App extends React.Component {
                       )}
                     />
                     <CreateTeacher
+                      data={this.state.data}
                       schoolName={schoolName}
                       handleCloseForm={this.handleCloseTeacherForm}
                       formIsOpen={this.state.teacherFormIsOpen}
@@ -223,6 +224,7 @@ class App extends React.Component {
                       )}
                     />
                     <CreateClassroom
+                      data={this.state.data}
                       schoolName={schoolName}
                       handleCloseForm={this.handleCloseClassroomForm}
                       formIsOpen={this.state.classroomFormIsOpen}
@@ -235,6 +237,7 @@ class App extends React.Component {
                       )}
                     />
                     <CreateBranch
+                      data={this.state.data}
                       schoolName={schoolName}
                       handleCloseForm={this.handleCloseBranchForm}
                       formIsOpen={this.state.branchFormIsOpen}

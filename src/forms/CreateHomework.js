@@ -90,8 +90,7 @@ class CreateHomework extends React.Component {
   render() {
     const { openIt, closeIt, classes } = this.props;
     const { sinif, baslama, bitis, konu, odev } = this.state;
-    // console.log(this.checked)
-    // console.log(this.newState)
+  
     return (
       <div>
         <Dialog
