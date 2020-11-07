@@ -1,1 +1,6 @@
-export const ADD_SCHOOL = "ADD_SCHOOL"
+export const ADD_SCHOOL = "ADD_SCHOOL";
+export const ADD_TEACHER = "ADD_TEACHER";
+export const OPEN_TEACHER_FORM = "OPEN_TEACHER_FORM";
+export const CLOSE_TEACHER_FORM = "OPEN_TEACHER_FORM";
+export const OPEN_SCHOOL_FORM = "OPEN_SCHOOL_FORM";
+export const CLOSE_SCHOOL_FORM = "CLOSE_SCHOOL_FORM";

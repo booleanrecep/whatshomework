@@ -2,35 +2,22 @@ import React from "react";
 import {
   Grid,
   Typography,
-  AppBar,
-  Toolbar,
   makeStyles,
-  Button,
   Paper,
   CardMedia,
+  Tooltip,
+  Fab,
+  Avatar,
 } from "@material-ui/core";
-import { Tooltip, Fab, IconButton, Avatar } from "@material-ui/core";
-import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
-import AccountBalanceTwoToneIcon from "@material-ui/icons/AccountBalanceTwoTone";
-import op from "../images/op.png";
 
-import {
-  Link,
-  useHistory,
-  useRouteMatch,
-  useParams,
-  useLocation,
-  Route,
-  Switch,
-} from "react-router-dom";
-import CanvasDraw from "react-canvas-draw";
-import mountains from "../images/imgs/mountaines.png";
-import { assets } from "../images/svg/ecology/index";
-import { schoolsData } from "../data";
-import DneClass from "../components/DneClass";
+import { Link } from "react-router-dom";
+
 import { red } from "@material-ui/core/colors";
 import AddIcon from "@material-ui/icons/Add";
-
+import { connect } from "react-redux";
+const mapStateToProps = (state) => {
+  return { classrooms: state.classrooms };
+};
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -59,15 +46,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const INNER_WIDTH = window.outerWidth;
-
-const Classrooms = ({ classrooms }) => {
+const Classrooms = ({ classrooms, whichSchool }) => {
+  const classroomsToMap =
+    whichSchool === undefined
+      ? classrooms
+      : classrooms.filter((classroom) => classroom.school === whichSchool);
   const classes = useStyles();
-  let history = useHistory();
-  const match = useRouteMatch();
-  const params = useParams();
-  const loc = useLocation();
-  console.log(loc);
+
   return (
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
       <Grid item xs={10}>
@@ -75,7 +60,7 @@ const Classrooms = ({ classrooms }) => {
           CLASSROOMS
         </Typography>
       </Grid>
-      {classrooms.map(({ name, image, school, classroomID }) => {
+      {classroomsToMap.map(({ name, image, school, classroomID }) => {
         return (
           <Grid item xs={6} sm={4} lg={3} key={classroomID}>
             <Paper variant="outlined" elevation={3}>
@@ -101,7 +86,11 @@ const Classrooms = ({ classrooms }) => {
         );
       })}
       <Grid item xs={6} sm={4} lg={3} key={"c"}>
-        <Paper variant="outlined" elevation={3} style={{ textAlign: "center", height: "11em" }}>
+        <Paper
+          variant="outlined"
+          elevation={3}
+          style={{ textAlign: "center", height: "11em" }}
+        >
           <Tooltip
             title="Add New Classroom"
             //  onClick={handleOpenForm}
@@ -115,4 +104,4 @@ const Classrooms = ({ classrooms }) => {
     </Grid>
   );
 };
-export default Classrooms;
+export default connect(mapStateToProps)(Classrooms);

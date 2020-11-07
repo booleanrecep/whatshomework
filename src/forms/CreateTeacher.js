@@ -22,74 +22,82 @@ const styles = (theme) => ({
     },
   },
 });
+import { connect } from "react-redux";
 
-class CreateTeacher extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      teachers: props.teachers,
-      newTeachers: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleAddTeacherl = this.handleAddTeacher.bind(this);
-    this.closeForm = props.handleCloseForm;
-  }
-  handleChange = (e) => {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closeForm: () => dispatch({ type: "CLOSE_TEACHER_FORM" }),
+    addTeacher: (teacher) => dispatch({ type: "ADD_TEACHER", teacher }),
+  };
+};
+const mapStateToProps = (state) => {
+  return {
+    isOpen: state.teacherFormIsOpen,
+  };
+};
+const CreateTeacher = ({ isOpen, closeForm, addTeacher, classes }) => {
+  const [state, setState] = React.useState({
+    teacherID: "",
+    name: "",
+    school: "",
+    photo: "",
+    branch: "",
+    homeworks: [],
+    classrooms: [],
+  });
+  const handleChange = (e) => {
     const ID = Math.floor(Math.random() * 10 + 2);
     e.preventDefault();
-    this.setState({
-      newTeacher: {
-        teacherID: "",
-        name: "",
-        school: "",
-        photo: "",
-        branch: "",
-        homeworks: [],
-        classrooms: [],
-      },
+    setState({
+      teacherID: ID,
+      name: "",
+      school: "",
+      branch: "",
+      classrooms: [],
     });
   };
 
-  handleAddTeacher= () => {
-    this.state.teachers.push(this.state.newTeachers);
-    this.closeForm();
+  const handleAddTeacher = () => {
+    addTeacher(state);
+    closeForm();
   };
 
-  render() {
-    const { formIsOpen, handleCloseForm, classes } = this.props;
-    return (
-      <div>
-        <Dialog open={formIsOpen} onClose={handleCloseForm}>
-          <DialogTitle>New Teacher</DialogTitle>
-          <DialogContent>
-            <DialogContentText>Add A New Teacher</DialogContentText>
-            <FormControl>
-              <TextField
-                onChange={this.handleChange}
-                value={this.state.name}
-                margin="dense"
-                name="name"
-                label="Name"
-                type="text"
-                inputProps={{
-                  maxLength: "25",
-                }}
-                className={classes.input}
-              />
-            </FormControl>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseForm} color="secondary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleAddTeacher} color="default">
-              Add
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Dialog open={isOpen} onClose={closeForm}>
+        <DialogTitle>New Teacher</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Add A New Teacher</DialogContentText>
+          <FormControl>
+            <TextField
+              onChange={handleChange}
+              value={state.name}
+              margin="dense"
+              name="name"
+              label="Name"
+              type="text"
+              inputProps={{
+                maxLength: "25",
+              }}
+              className={classes.input}
+            />
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeForm} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleAddTeacher} color="default">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
 
-export default withStyles(styles)(CreateTeacher);
+const Form = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(CreateTeacher));
+export default Form;

@@ -5,6 +5,7 @@ import {
   Fab,
   Typography,
   withStyles,
+  makeStyles,
   Paper,
   CardMedia,
 } from "@material-ui/core";
@@ -25,13 +26,13 @@ import Branches from "./data_components/Branches";
 import CreateSchool from "./forms/CreateSchool";
 import CreateTeacher from "./forms/CreateTeacher";
 
-import  {connect} from "react-redux"
+import { connect } from "react-redux";
 
-const mapStateToProps = state =>{
-  return {data:state.data}
-}
+const mapStateToProps = (state) => {
+  return { data: state };
+};
 
-const styles = (theme) => ({
+const styles = makeStyles((theme) => ({
   absolute: {
     position: "fixed",
     bottom: theme.spacing(3),
@@ -68,122 +69,96 @@ const styles = (theme) => ({
       left: "18%",
     },
   },
-});
+}));
 
 const INNER_WIDTH = window.outerWidth; //For mobile screens
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = ({ data }) => {
+  const classes = styles();
+  return (
+    <Router>
+      <div>
+        {/* Helmet */}
+        <Seo />
 
-    this.state = {
-      data: props.data,
-      formIsOpen: false,
-    };
-    this.handleOpenForm = this.handleOpenForm.bind(this);
-    this.handleCloseForm = this.handleCloseForm.bind(this);
-  }
+        <Grid container>
+          <Switch>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            <Route exact path="/schools">
+              <Appbar header="SCHOOLS" INNER_WIDTH={INNER_WIDTH} />
 
-  handleOpenForm = () => {
-    this.setState({
-      formIsOpen: true,
-    });
-  };
-  handleCloseForm = () => {
-    this.setState({
-      formIsOpen: false,
-    });
-  };
-  render() {
-    const { classes } = this.props;
+              <Schools />
+            </Route>
+            <Route exact path="/teachers">
+              <Appbar header="TEACHERS" INNER_WIDTH={INNER_WIDTH} />
 
-    return (
-      <Router>
-        <div>
-          {/* Helmet */}
-          <Seo />
+              <Teachers showSchool={true} />
+            </Route>
+            {data.schools.map(({ name, image }) => {
+              const schoolName = name;
+              return (
+                <Route exact path={`/schools/${name}`}>
+                  <Appbar
+                    INNER_WIDTH={INNER_WIDTH}
+                    header={name + " COLLEGE"}
+                  />
+                  <Grid container spacing={2} style={{ marginTop: "5em" }}>
+                    <Grid item xs={12} sm={12} lg={12}>
+                      <Paper
+                        variant="outlined"
+                        elevation={3}
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          height: "10em",
+                          textAlign: "center",
+                        }}
+                      >
+                        <CardMedia style={{ padding: "5em" }} image={image} />
 
-          <Grid container>
-            <Switch>
-              <Route exact path="/">
-                <LandingPage />
-              </Route>
-              <Route exact path="/schools">
-                <Appbar
-                  header="SCHOOLS"
-                  checked={this.state.checked}
-                  INNER_WIDTH={INNER_WIDTH}
-                />
-
-                <Schools
-                  schools={this.state.data.schools}
-                  handleOpenForm={this.handleOpenForm}
-                />
-                <CreateSchool
-                  handleCloseForm={this.handleCloseForm}
-                  formIsOpen={this.state.formIsOpen}
-                  schools={this.state.data.schools}
-                />
-              </Route>
-              <Route exact path="/teachers">
-                <Appbar
-                  header="TEACHERS"
-                  checked={this.state.checked}
-                  INNER_WIDTH={INNER_WIDTH}
-                />
-
-                <Teachers
-                  // handleOpenForm={this.handleOpenForm}
-                  showSchool={true}
-                  teachers={this.state.data.teachers}
-                />
-              </Route>
-              {this.state.data.schools.map(({ name, image }) => {
-                return (
-                  <Route exact path={`/schools/${name}`}>
-                    <Appbar
-                      INNER_WIDTH={INNER_WIDTH}
-                      header={name + " COLLEGE"}
-                    />
-                    <Grid container spacing={2} style={{ marginTop: "5em" }}>
-                      <Grid item xs={12} sm={12} lg={12}>
-                        <Paper
-                          variant="outlined"
-                          elevation={3}
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            height: "10em",
-                            textAlign: "center",
-                          }}
-                        >
-                          <CardMedia style={{ padding: "5em" }} image={image} />
-
-                          <div>
-                            <Typography variant="h5" component="h2">
-                              {`WELLCOME TO ${name} COLLEGE`}
-                            </Typography>
-                          </div>
-                        </Paper>
-                      </Grid>
+                        <div>
+                          <Typography variant="h5" component="h2">
+                            {`WELLCOME TO ${name} COLLEGE`}
+                          </Typography>
+                        </div>
+                      </Paper>
                     </Grid>
+                  </Grid>
 
-                    <Teachers
-                      // handleOpenForm={this.handleOpenForm}
-                      teachers={this.state.data.teachers.filter(
-                        (teacher) => teacher.school === name
-                      )}
-                    />
+                  <Teachers whichSchool={schoolName} />
+                  <Classrooms whichSchool={schoolName} />
+                  <Branches whichSchool={schoolName} />
+
+                  <Link to="/schools">
+                    <Tooltip
+                      title="Anasayfa"
+                      aria-label="anasayfa"
+                      className={classes.absolute}
+                    >
+                      <Fab color="secondary">
+                        <ArrowBackIcon />
+                      </Fab>
+                    </Tooltip>
+                  </Link>
+                </Route>
+              );
+            })}
+            {data.teachers.map(
+              ({ name, school, photo, branch, homeworks, classrooms }) => {
+                return (
+                  <Route path={`/schools/${school}/${name}`}>
+                    <Appbar header={school + " COLLEGE " + "- " + name} />
                     <Classrooms
-                      classrooms={this.state.data.classrooms.filter(
-                        (classroom) => classroom.school === name
+                      classrooms={data.classrooms.filter((classroom) =>
+                        classrooms.includes(classroom.classroomID)
                       )}
                     />
-                    <Branches
-                      branches={this.state.data.branches.filter(
-                        (branch) => branch.school === name
+                    <Homeworks
+                      homeworks={data.homeworks.filter((homework) =>
+                        homeworks.includes(homework.homeworkID)
                       )}
                     />
-
                     <Link to="/schools">
                       <Tooltip
                         title="Anasayfa"
@@ -197,77 +172,41 @@ class App extends React.Component {
                     </Link>
                   </Route>
                 );
-              })}
-              {this.state.data.teachers.map(
-                ({ name, school, photo, branch, homeworks, classrooms }) => {
-                  return (
-                    <Route path={`/schools/${school}/${name}`}>
-                      <Appbar header={school + " COLLEGE " + "- " + name} />
-                      <Classrooms
-                        classrooms={this.state.data.classrooms.filter(
-                          (classroom) =>
-                            classrooms.includes(classroom.classroomID)
-                        )}
-                      />
-                      <Homeworks
-                        homeworks={this.state.data.homeworks.filter(
-                          (homework) => homeworks.includes(homework.homeworkID)
-                        )}
-                      />
-                      <Link to="/schools">
-                        <Tooltip
-                          title="Anasayfa"
-                          aria-label="anasayfa"
-                          className={classes.absolute}
-                        >
-                          <Fab color="secondary">
-                            <ArrowBackIcon />
-                          </Fab>
-                        </Tooltip>
-                      </Link>
-                    </Route>
-                  );
-                }
-              )}
+              }
+            )}
 
-              {this.state.data.classrooms.map(
-                ({ school, name, image, teachers, homeworks }) => {
-                  return (
-                    <Route path={`/schools/${school}/${name}`}>
-                      <Appbar header={school + " COLLEGE " + "- " + name} />
-                      <Teachers
-                        handleOpenForm={this.handleOpenForm}
-                        teachers={this.state.data.teachers.filter((teacher) =>
-                          teachers.includes(teacher.teacherID)
-                        )}
-                      />
-                      <Homeworks
-                        homeworks={this.state.data.homeworks.filter(
-                          (homework) => homeworks.includes(homework.homeworkID)
-                        )}
-                      />
-                      <Link to="/schools">
-                        <Tooltip
-                          title="Anasayfa"
-                          aria-label="anasayfa"
-                          className={classes.absolute}
-                        >
-                          <Fab color="secondary">
-                            <ArrowBackIcon />
-                          </Fab>
-                        </Tooltip>
-                      </Link>
-                    </Route>
-                  );
-                }
-              )}
-            </Switch>
-          </Grid>
-        </div>
-      </Router>
-    );
-  }
-}
+            {data.classrooms.map(
+              ({ school, name, image, teachers, homeworks }) => {
+                return (
+                  <Route path={`/schools/${school}/${name}`}>
+                    <Appbar header={school + " COLLEGE " + "- " + name} />
+                    <Teachers />
+                    <Homeworks
+                      homeworks={data.homeworks.filter((homework) =>
+                        homeworks.includes(homework.homeworkID)
+                      )}
+                    />
+                    <Link to="/schools">
+                      <Tooltip
+                        title="Anasayfa"
+                        aria-label="anasayfa"
+                        className={classes.absolute}
+                      >
+                        <Fab color="secondary">
+                          <ArrowBackIcon />
+                        </Fab>
+                      </Tooltip>
+                    </Link>
+                  </Route>
+                );
+              }
+            )}
+          </Switch>
+        </Grid>
+      </div>
+    </Router>
+  );
+};
 
-const MappedApp = connect(mapStateToProps)(App)
-export default withStyles(styles)(MappedApp);
+const MappedApp = connect(mapStateToProps)(App);
+export default MappedApp;

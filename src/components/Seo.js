@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import favicon from "../images/favicon.png";
 import AccountBalanceTwoToneIcon from "@material-ui/icons/AccountBalanceTwoTone";
-const ico=()=><AccountBalanceTwoToneIcon/>
+const ico = () => <AccountBalanceTwoToneIcon />;
 const Seo = () => {
   return (
     <Helmet>

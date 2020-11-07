@@ -32,7 +32,7 @@ const objects = {
     {
       branchID: "",
       name: "",
-      school:"",
+      school: "",
       teacher: "",
       homeworks: [],
       lessons: [],
@@ -46,8 +46,8 @@ const objects = {
       teachers: [],
       students: [],
       classrooms: [],
-      branches:[],
-      homeworks:[],
+      branches: [],
+      homeworks: [],
     },
   ],
   teachers: [
@@ -63,7 +63,7 @@ const objects = {
   ],
   classrooms: [
     {
-      school:"",
+      school: "",
       name: "",
       image: "",
       classroomID: "",
@@ -74,11 +74,11 @@ const objects = {
   ],
   homeworks: [
     {
-      school:"",
-      classroom:"",
+      school: "",
+      classroom: "",
       homeworkID: "",
       teacher: "",
-      branch:"",
+      branch: "",
       start: `${tr.getFullDate(".")}`,
       end: `${tr.getFullDate(".")}`,
       topic: "",

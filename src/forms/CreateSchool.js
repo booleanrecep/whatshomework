@@ -7,21 +7,24 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  InputLabel,
-  MenuItem,
   FormControl,
-  Select,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 
-import {connect} from "react-redux"
-import {addSchool} from "../redux_files/actions/index"
+import { connect } from "react-redux";
 
-function mapDispatchToProps(dispatch){
-  return {addSchool:school => dispatch(addSchool(school))}
-}
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addSchool: (school) => dispatch({ type: "ADD_SCHOOL", school }),
+    closeForm: () => dispatch({ type: "CLOSE_SCHOOL_FORM" }),
+  };
+};
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    isOpen: state.schoolFormIsOpen,
+  };
+};
 const styles = (theme) => ({
   input: {
     width: "14em",
@@ -31,88 +34,67 @@ const styles = (theme) => ({
   },
 });
 
-class CreateSchool extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      schools: props.schools,
-      newSchool: {
-        schoolID: "",
-        image: "",
-        name: "",
-        teachers: [],
-        students: [],
-        classrooms: [],
-        branches: [],
-        homeworks: [],
-      },
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleAddSchool = this.handleAddSchool.bind(this);
-    this.closeForm = props.handleCloseForm;
-  }
-  handleChange = (e) => {
-    const ID = Math.floor(Math.random() * 10 + 2);
+const CreateSchool = ({ isOpen, closeForm, addSchool, classes }) => {
+  const [state, setState] = React.useState({
+    schoolID: "",
+    image: "",
+    name: "",
+    teachers: [],
+    students: [],
+    classrooms: [],
+    branches: [],
+    homeworks: [],
+  });
+  const handleChange = (e) => {
     e.preventDefault();
-    this.setState({
-      newSchool: {
-        schoolID: ID,
-        image: "",
-        name: e.target.value,
-        teachers: [],
-        students: [],
-        classrooms: [],
-        branches: [],
-        homeworks: [],
-      },
+    const ID = Math.floor(Math.random() * 10 + 2);
+    setState({
+      schoolID: ID,
+      name: e.target.value,
     });
   };
 
-  handleAddSchool = () => {
-    this.props.addSchool(this.state.newSchool)
-    // this.state.schools.push(this.state.newSchool);
-    this.closeForm();
+  const handleAddSchool = () => {
+    addSchool(state);
+    closeForm();
   };
 
-  render() {
-    const { formIsOpen, handleCloseForm, classes } = this.props;
-    console.log(this.state.schools);
-    return (
-      <div>
-        <Dialog open={formIsOpen} onClose={handleCloseForm}>
-          <DialogTitle>New School</DialogTitle>
-          <DialogContent>
-            <DialogContentText>Add A New School</DialogContentText>
-            <FormControl>
-              <TextField
-                onChange={this.handleChange}
-                value={this.state.name}
-                margin="dense"
-                name="name"
-                label="Name"
-                type="text"
-                inputProps={{
-                  maxLength: "25",
-                }}
-                className={classes.input}
-              />
-            </FormControl>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseForm} color="secondary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleAddSchool} color="default">
-              Add
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Dialog open={isOpen} onClose={closeForm}>
+        <DialogTitle>New School</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Add A New School</DialogContentText>
+          <FormControl>
+            <TextField
+              onChange={handleChange}
+              value={state.name}
+              margin="dense"
+              name="name"
+              label="Name"
+              type="text"
+              inputProps={{
+                maxLength: "25",
+              }}
+              className={classes.input}
+            />
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeForm} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleAddSchool} color="default">
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+
 const Form = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(CreateSchool)
-export default withStyles(styles)(Form);
+)(withStyles(styles)(CreateSchool));
+export default Form;

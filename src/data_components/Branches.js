@@ -2,36 +2,21 @@ import React from "react";
 import {
   Grid,
   Typography,
-  AppBar,
-  Toolbar,
   makeStyles,
-  Button,
   Paper,
-  CardMedia,
+  Tooltip,
+  Fab,
+  Avatar,
 } from "@material-ui/core";
-import { Tooltip, Fab, IconButton, Avatar } from "@material-ui/core";
-import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
-import AccountBalanceTwoToneIcon from "@material-ui/icons/AccountBalanceTwoTone";
-import op from "../images/op.png";
 
-import {
-  Link,
-  useHistory,
-  useRouteMatch,
-  useParams,
-  useLocation,
-  Route,
-  Switch,
-} from "react-router-dom";
-import CanvasDraw from "react-canvas-draw";
-import mountains from "../images/imgs/mountaines.png";
-import { assets } from "../images/svg/ecology/index";
-import { schoolsData } from "../data";
-import DneClass from "../components/DneClass";
+import { Link } from "react-router-dom";
 import { red } from "@material-ui/core/colors";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import AddIcon from "@material-ui/icons/Add";
-
+import { connect } from "react-redux";
+const mapStateToProps = (state) => {
+  return { branches: state.branches };
+};
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -60,15 +45,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const INNER_WIDTH = window.outerWidth;
-
-const Branches = ({ branches }) => {
+const Branches = ({ branches, whichSchool }) => {
+  const branchesToMap =
+    whichSchool === undefined
+      ? branches
+      : branches.filter((branche) => branche.school === whichSchool);
   const classes = useStyles();
-  let history = useHistory();
-  const match = useRouteMatch();
-  const params = useParams();
-  const loc = useLocation();
-  console.log(loc);
   return (
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
       <Grid item xs={10}>
@@ -76,7 +58,7 @@ const Branches = ({ branches }) => {
           BRANCHES
         </Typography>
       </Grid>
-      {branches.map(({ name, school, branchID, teacher, homeworks }) => {
+      {branchesToMap.map(({ name, school, branchID, teacher, homeworks }) => {
         return (
           <Grid item xs={6} sm={4} lg={3} key={branchID}>
             <Paper variant="outlined" elevation={3}>
@@ -91,7 +73,10 @@ const Branches = ({ branches }) => {
                   fontSize="large"
                   style={{ margin: "0.5em 0.5em 0.5em 0.5em" }}
                 />
-                <Typography  variant="subtitle1" style={{ margin: "1.5em 0 0 0" }} >
+                <Typography
+                  variant="subtitle1"
+                  style={{ margin: "1.5em 0 0 0" }}
+                >
                   {name}
                 </Typography>
               </div>
@@ -119,7 +104,7 @@ const Branches = ({ branches }) => {
                     {teacher}
                   </Avatar>
                 </Link>
-                <Typography gutterBottom variant="h6" >
+                <Typography gutterBottom variant="h6">
                   {teacher}
                 </Typography>
               </div>
@@ -128,7 +113,11 @@ const Branches = ({ branches }) => {
         );
       })}
       <Grid item xs={6} sm={4} lg={3} key={"b"}>
-        <Paper variant="outlined" elevation={3} style={{ textAlign: "center", height: "7.5em" }}>
+        <Paper
+          variant="outlined"
+          elevation={3}
+          style={{ textAlign: "center", height: "7.5em" }}
+        >
           <Tooltip
             title="Add New Branch"
             //  onClick={handleOpenForm}
@@ -142,4 +131,4 @@ const Branches = ({ branches }) => {
     </Grid>
   );
 };
-export default Branches;
+export default connect(mapStateToProps)(Branches);

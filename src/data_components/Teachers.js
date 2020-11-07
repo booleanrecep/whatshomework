@@ -2,35 +2,29 @@ import React from "react";
 import {
   Grid,
   Typography,
-  AppBar,
-  Toolbar,
+  Tooltip,
+  Fab,
+  Avatar,
   makeStyles,
-  Button,
   Paper,
-  CardMedia,
 } from "@material-ui/core";
-import { Tooltip, Fab, IconButton, Avatar } from "@material-ui/core";
-import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
 import AccountBalanceTwoToneIcon from "@material-ui/icons/AccountBalanceTwoTone";
-import op from "../images/op.png";
 
-import {
-  Link,
-  useHistory,
-  useRouteMatch,
-  useParams,
-  useLocation,
-  Route,
-  Switch,
-} from "react-router-dom";
-import CanvasDraw from "react-canvas-draw";
-import mountains from "../images/imgs/mountaines.png";
-import { assets } from "../images/svg/ecology/index";
-import { schoolsData } from "../data";
-import DneClass from "../components/DneClass";
+import { Link } from "react-router-dom";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
-// import AccountBalanceTwoToneIcon from "@material-ui/icons/AccountBalanceTwoTone";
 import AddIcon from "@material-ui/icons/Add";
+
+import { connect } from "react-redux";
+import CreateTeacher from "../forms/CreateTeacher";
+
+const mapStateToProps = (state) => {
+  return { teachers: state.teachers };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openForm: () => dispatch({ type: "OPEN_TEACHER_FORM" }),
+  };
+};
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -38,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: "10em",
-    // width: "14em",
   },
   button: {
     width: "15em",
@@ -74,13 +67,12 @@ const useStyles = makeStyles((theme) => ({
 
 const INNER_WIDTH = window.outerWidth;
 
-const Teachers = ({ teachers, showSchool, handleOpenForm }) => {
+const Teachers = ({ teachers, showSchool, openForm, whichSchool }) => {
   const classes = useStyles();
-  let history = useHistory();
-  const match = useRouteMatch();
-  const params = useParams();
-  const loc = useLocation();
-  console.log(loc);
+  const teachersToMap =
+    whichSchool === undefined
+      ? teachers
+      : teachers.filter((teacher) => teacher.school === whichSchool);
   return (
     <Grid container spacing={2} style={{ marginTop: "5em" }}>
       <Grid item xs={10} sm={10} lg={10}>
@@ -88,7 +80,7 @@ const Teachers = ({ teachers, showSchool, handleOpenForm }) => {
           TEACHERS
         </Typography>
       </Grid>
-      {teachers.map(({ name, photo, branch, school, teacherID }) => {
+      {teachersToMap.map(({ name, photo, branch, school, teacherID }) => {
         return (
           <Grid item xs={6} sm={4} lg={3} key={teacherID}>
             <Paper
@@ -146,10 +138,7 @@ const Teachers = ({ teachers, showSchool, handleOpenForm }) => {
               height: "8em",
             }}
           >
-            <Tooltip
-              title="Add New Teacher"
-              //  onClick={handleOpenForm}
-            >
+            <Tooltip title="Add New Teacher" onClick={openForm}>
               <Fab style={{ color: "green", marginTop: "2.5em" }}>
                 <AddIcon style={{ width: "2em", height: "2em" }} />
               </Fab>
@@ -157,7 +146,8 @@ const Teachers = ({ teachers, showSchool, handleOpenForm }) => {
           </Paper>
         </Grid>
       )}
+      <CreateTeacher />
     </Grid>
   );
 };
-export default Teachers;
+export default connect(mapStateToProps, mapDispatchToProps)(Teachers);
