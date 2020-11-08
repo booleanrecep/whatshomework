@@ -16,6 +16,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import { connect } from "react-redux";
 import CreateTeacher from "../forms/CreateTeacher";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const mapStateToProps = (state) => {
   return { teachers: state.teachers };
@@ -23,6 +24,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     openForm: () => dispatch({ type: "OPEN_TEACHER_FORM" }),
+    deleteTeacher:(teacherID,school)=>dispatch({type:"DELETE_TEACHER",teacherID,school})
   };
 };
 
@@ -67,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 const INNER_WIDTH = window.outerWidth;
 
-const Teachers = ({ teachers, showSchool, openForm, whichSchool }) => {
+const Teachers = ({ teachers, showSchool, openForm, whichSchool,deleteTeacher }) => {
   const classes = useStyles();
   const teachersToMap =
     whichSchool === undefined
@@ -88,7 +90,7 @@ const Teachers = ({ teachers, showSchool, openForm, whichSchool }) => {
               elevation={3}
               style={{ display: "flex", flexDirection: "row" }}
             >
-              {/* <CardMedia className={classes.media} image={photo} /> */}
+              
               <div>
                 <Link
                   to={`/schools/${school}/${name}`}
@@ -123,6 +125,10 @@ const Teachers = ({ teachers, showSchool, openForm, whichSchool }) => {
                     </Typography>
                   </div>
                 ) : null}
+              <DeleteIcon
+                    style={{ marginLeft: "4em", cursor: "pointer" }}
+                    onClick={() => deleteTeacher(teacherID,school)}
+                  />
               </div>
             </Paper>
           </Grid>

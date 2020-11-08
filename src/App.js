@@ -4,7 +4,6 @@ import {
   Grid,
   Fab,
   Typography,
-  withStyles,
   makeStyles,
   Paper,
   CardMedia,
@@ -12,10 +11,6 @@ import {
 import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Appbar from "./ui_components/Appbar";
-// import TrDate from "tr-date";
-// import Draggable from "react-draggable";
-// import DneClass from "./components/DneClass";
-// import { schoolsData } from "./data";
 import Homeworks from "./data_components/Homeworks";
 import Seo from "./components/Seo";
 import LandingPage from "./ui_components/LandingPage";
@@ -23,8 +18,6 @@ import Schools from "./data_components/Schools";
 import Teachers from "./data_components/Teachers";
 import Classrooms from "./data_components/Classrooms";
 import Branches from "./data_components/Branches";
-import CreateSchool from "./forms/CreateSchool";
-import CreateTeacher from "./forms/CreateTeacher";
 
 import { connect } from "react-redux";
 
@@ -79,7 +72,7 @@ const styles = makeStyles((theme) => ({
 const INNER_WIDTH = window.outerWidth; //For mobile screens
 const App = ({ data }) => {
   const classes = styles();
-  console.log(data);
+  console.log(data)
   return (
     <Router>
       <div>

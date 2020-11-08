@@ -1,38 +1,23 @@
 import React from "react";
 import {
   Grid,
-  Typography,
-  AppBar,
-  Toolbar,
   makeStyles,
   Button,
   Paper,
-  CardMedia,
+  CardMedia,Tooltip, Fab,
 } from "@material-ui/core";
-import { Tooltip, Fab, IconButton, Avatar } from "@material-ui/core";
-import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
-import AccountBalanceTwoToneIcon from "@material-ui/icons/AccountBalanceTwoTone";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import op from "../images/op.png";
 import CreateSchool from "../forms/CreateSchool";
 import {
-  Link,
   useHistory,
   useRouteMatch,
-  useParams,
-  useLocation,
-  Route,
-  Switch,
+ 
 } from "react-router-dom";
-import CanvasDraw from "react-canvas-draw";
-import mountains from "../images/imgs/mountaines.png";
-import { assets } from "../images/svg/ecology/index";
-import { schoolsData } from "../data";
-import DneClass from "../components/DneClass";
+
 import AddIcon from "@material-ui/icons/Add";
 import { connect } from "react-redux";
-import { TrainOutlined } from "@material-ui/icons";
 
 const mapStateToProps = (state) => {
   return { schools: state.schools };

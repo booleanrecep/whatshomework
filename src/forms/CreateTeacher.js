@@ -68,11 +68,9 @@ const CreateTeacher = ({
     homeworks: [],
     classrooms: [],
   });
-  console.log(state.teacherID);
   const handleChange = (e) => {
     e.preventDefault();
     e.persist();
-    console.log(e.target.name);
     setState((prevState) => ({
       ...prevState,
 
@@ -116,7 +114,7 @@ const CreateTeacher = ({
 
   const classes = styles();
   return (
-    <div>
+    <div >
       <Dialog open={isOpen} onClose={handleCloseForm}>
         <DialogTitle>New Teacher</DialogTitle>
         <DialogContent>
@@ -194,12 +192,12 @@ const CreateTeacher = ({
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseForm} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleAddTeacher} color="default">
-            Add
-          </Button>
+          <div onClick={handleCloseForm}>
+            <Button color="secondary">Cancel</Button>
+          </div>
+          <div onClick={handleAddTeacher}>
+            <Button color="default">Add</Button>
+          </div>
         </DialogActions>
       </Dialog>
     </div>

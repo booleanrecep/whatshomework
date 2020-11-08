@@ -50,9 +50,10 @@ const CreateSchool = ({ isOpen, closeForm, addSchool }) => {
   });
   const handleChange = (e) => {
     e.preventDefault();
-    setState({
+    setState(prevState=>({
+      ...prevState,
       name: e.target.value,
-    });
+    }));
   };
 
   const handleAddSchool = () => {
@@ -83,12 +84,12 @@ const CreateSchool = ({ isOpen, closeForm, addSchool }) => {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeForm} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleAddSchool} color="default">
-            Add
-          </Button>
+          <div onClick={closeForm}>
+            <Button color="secondary">Cancel</Button>
+          </div>
+          <div onClick={handleAddSchool}>
+            <Button color="default">Add</Button>
+          </div>
         </DialogActions>
       </Dialog>
     </div>

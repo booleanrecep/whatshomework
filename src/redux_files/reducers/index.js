@@ -5,7 +5,7 @@ import {
   CLOSE_TEACHER_FORM,
   OPEN_SCHOOL_FORM,
   CLOSE_SCHOOL_FORM,
-  RESEND_DATA,
+  DELETE_TEACHER,
   DELETE_SCHOOL,
 } from "../constants/index";
 import { dummyData } from "../../data";
@@ -24,12 +24,15 @@ function rootReducer(state = initialState, action) {
         schools: state.schools.concat(action.school),
       };
 
-      break;
+      
     case DELETE_SCHOOL:
       return {
         ...state,
         schools: state.schools.filter(
           (school) => school.name !== action.school
+        ),
+        teachers: state.teachers.filter(
+          (teacher) => teacher.school !== action.school
         ),
       };
 
@@ -46,6 +49,27 @@ function rootReducer(state = initialState, action) {
             : school
         ),
       };
+      case DELETE_TEACHER:
+        return {
+          ...state,
+          schools: state.schools.map((school) =>
+          school.name === action.school
+            ? {
+                ...school,
+                teachers:school.teachers.filter(teacher=>teacher!==action.teacherID),
+              }: school,
+           
+        ),
+        teachers: state.teachers.filter(teacher=> teacher.teacherID !==action.teacherID)
+          // schools: state.schools.filter(
+          //   (school) => school.name !== action.teacer
+          // ),
+          // teachers: state.teachers.filter(
+          //   (teacher) => teacher.school !== action.teacher
+          // ),
+        };
+  
+
 
     case OPEN_SCHOOL_FORM:
       return {
@@ -67,8 +91,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         teacherFormIsOpen: false,
       };
-    case RESEND_DATA:
-      return state;
     default:
       return state;
   }
