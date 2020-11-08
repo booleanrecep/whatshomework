@@ -146,7 +146,7 @@ const Teachers = ({ teachers, showSchool, openForm, whichSchool }) => {
           </Paper>
         </Grid>
       )}
-      <CreateTeacher />
+      <CreateTeacher schoolName={whichSchool} />
     </Grid>
   );
 };

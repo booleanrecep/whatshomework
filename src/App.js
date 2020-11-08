@@ -32,6 +32,7 @@ const mapStateToProps = (state) => {
   return { data: state };
 };
 
+
 const styles = makeStyles((theme) => ({
   absolute: {
     position: "fixed",
@@ -74,6 +75,7 @@ const styles = makeStyles((theme) => ({
 const INNER_WIDTH = window.outerWidth; //For mobile screens
 const App = ({ data }) => {
   const classes = styles();
+  console.log(data);
   return (
     <Router>
       <div>
@@ -146,17 +148,16 @@ const App = ({ data }) => {
             })}
             {data.teachers.map(
               ({ name, school, photo, branch, homeworks, classrooms }) => {
+                const schoolName = school;
+
                 return (
                   <Route path={`/schools/${school}/${name}`}>
                     <Appbar header={school + " COLLEGE " + "- " + name} />
-                    <Classrooms
-                      classrooms={data.classrooms.filter((classroom) =>
-                        classrooms.includes(classroom.classroomID)
-                      )}
-                    />
+                    <Classrooms whichSchool={schoolName} />
                     <Homeworks
-                      homeworks={data.homeworks.filter((homework) =>
-                        homeworks.includes(homework.homeworkID)
+                      homeworks={data.homeworks.filter(
+                        (homework) =>
+                          homeworks && homeworks.includes(homework.homeworkID)
                       )}
                     />
                     <Link to="/schools">
@@ -177,10 +178,12 @@ const App = ({ data }) => {
 
             {data.classrooms.map(
               ({ school, name, image, teachers, homeworks }) => {
+                const schoolName = school;
+
                 return (
                   <Route path={`/schools/${school}/${name}`}>
                     <Appbar header={school + " COLLEGE " + "- " + name} />
-                    <Teachers />
+                    <Teachers whichSchool={schoolName} />
                     <Homeworks
                       homeworks={data.homeworks.filter((homework) =>
                         homeworks.includes(homework.homeworkID)

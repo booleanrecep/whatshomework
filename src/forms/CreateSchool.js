@@ -9,9 +9,10 @@ import {
   DialogTitle,
   FormControl,
 } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -20,23 +21,25 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     isOpen: state.schoolFormIsOpen,
   };
 };
-const styles = (theme) => ({
+const styles = makeStyles((theme) => ({
   input: {
     width: "14em",
     [theme.breakpoints.up("sm")]: {
       width: "18em",
     },
   },
-});
+}));
 
-const CreateSchool = ({ isOpen, closeForm, addSchool, classes }) => {
+const CreateSchool = ({ isOpen, closeForm, addSchool }) => {
+  const ID = uuidv4();
+
+  const classes = styles();
   const [state, setState] = React.useState({
-    schoolID: "",
+    schoolID: `school${ID}`,
     image: "",
     name: "",
     teachers: [],
@@ -47,9 +50,7 @@ const CreateSchool = ({ isOpen, closeForm, addSchool, classes }) => {
   });
   const handleChange = (e) => {
     e.preventDefault();
-    const ID = Math.floor(Math.random() * 10 + 2);
     setState({
-      schoolID: ID,
       name: e.target.value,
     });
   };
@@ -93,8 +94,5 @@ const CreateSchool = ({ isOpen, closeForm, addSchool, classes }) => {
   );
 };
 
-const Form = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(CreateSchool));
+const Form = connect(mapStateToProps, mapDispatchToProps)(CreateSchool);
 export default Form;

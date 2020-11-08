@@ -7,64 +7,116 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  InputLabel,
   MenuItem,
   FormControl,
-  Select,
+  Avatar,
 } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
-const styles = (theme) => ({
+import { makeStyles } from "@material-ui/core/styles";
+import { v4 as uuidv4 } from "uuid";
+
+import { connect } from "react-redux";
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTeacher: (teacher) => dispatch({ type: "ADD_TEACHER", teacher }),
+
+    closeForm: () => dispatch({ type: "CLOSE_TEACHER_FORM" }),
+  };
+};
+const mapStateToProps = (state) => {
+  return {
+    isOpen: state.teacherFormIsOpen,
+    classrooms: state.classrooms,
+  };
+};
+const styles = makeStyles((theme) => ({
   input: {
     width: "14em",
     [theme.breakpoints.up("sm")]: {
       width: "18em",
     },
   },
-});
-import { connect } from "react-redux";
+  avatar: {
+    backgroundColor: "red",
+    width: "2em",
+    height: "2em",
+    fontSize: "1em",
+    margin: "0.1em",
+    cursor: "pointer",
+    "&:hover": {
+      color: "green",
+    },
+  },
+}));
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    closeForm: () => dispatch({ type: "CLOSE_TEACHER_FORM" }),
-    addTeacher: (teacher) => dispatch({ type: "ADD_TEACHER", teacher }),
-  };
-};
-const mapStateToProps = (state) => {
-  return {
-    isOpen: state.teacherFormIsOpen,
-  };
-};
-const CreateTeacher = ({ isOpen, closeForm, addTeacher, classes }) => {
+const CreateTeacher = ({
+  isOpen,
+  closeForm,
+  schoolName,
+  addTeacher,
+  classrooms,
+}) => {
+  const classroomToMap = classrooms.filter((cls) => cls.school === schoolName);
+  const ID = uuidv4();
+
   const [state, setState] = React.useState({
     teacherID: "",
     name: "",
-    school: "",
+    school: schoolName,
     photo: "",
     branch: "",
     homeworks: [],
     classrooms: [],
   });
   const handleChange = (e) => {
-    const ID = Math.floor(Math.random() * 10 + 2);
     e.preventDefault();
-    setState({
-      teacherID: ID,
-      name: "",
-      school: "",
-      branch: "",
-      classrooms: [],
-    });
+    e.persist()
+    console.log(e.target.name)
+    setState((prevState) => ({
+      ...prevState,
+      teacherID: `teacher${ID}`,
+      [e.target.name]: e.target.value,
+      // classrooms: state.classrooms,
+    }));
   };
 
   const handleAddTeacher = () => {
     addTeacher(state);
+    setState({
+      teacherID: "",
+      name: "",
+      school: "",
+      photo: "",
+      branch: "",
+      homeworks: [],
+      classrooms: [],
+    });
+    closeForm();
+  };
+  const handleCloseForm = () => {
+    setState({
+      teacherID: "",
+      name: "",
+      school: "",
+      photo: "",
+      branch: "",
+      homeworks: [],
+      classrooms: [],
+    });
     closeForm();
   };
 
+  const deleteCLS = (cls) => {
+    setState((prevState) => ({
+      ...prevState,
+      classrooms: state.classrooms.filter((clss) => clss !== cls),
+    }));
+  };
+
+  const classes = styles();
   return (
     <div>
-      <Dialog open={isOpen} onClose={closeForm}>
+      <Dialog open={isOpen} onClose={handleCloseForm}>
         <DialogTitle>New Teacher</DialogTitle>
         <DialogContent>
           <DialogContentText>Add A New Teacher</DialogContentText>
@@ -81,10 +133,61 @@ const CreateTeacher = ({ isOpen, closeForm, addTeacher, classes }) => {
               }}
               className={classes.input}
             />
+            <TextField
+              disabled
+              value={schoolName}
+              margin="dense"
+              name="school"
+              label="School"
+              type="text"
+              inputProps={{
+                maxLength: "25",
+              }}
+              className={classes.input}
+            />
+            <TextField
+              onChange={handleChange}
+              value={state.branch}
+              margin="dense"
+              name="branch"
+              label="Branch"
+              type="text"
+              inputProps={{
+                maxLength: "25",
+              }}
+              className={classes.input}
+            />
+
+            <TextField select label="Classrooms" value={state.classrooms}>
+              {classroomToMap.map((classroom) => (
+                <MenuItem
+                  onClick={() =>
+                    setState((prevState) => ({
+                      ...prevState,
+                      classrooms:state.classrooms.includes(classroom.name)?state.classrooms: state.classrooms.concat(classroom.name),
+                    }))
+                  }
+                  style={{ width: "4em" }}
+                  value={classroom.name}
+                >
+                  {classroom.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              {state.classrooms.map((classroom) => (
+                <Avatar
+                  className={classes.avatar}
+                  onClick={() => deleteCLS(classroom)}
+                >
+                  {classroom}
+                </Avatar>
+              ))}
+            </div>
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeForm} color="secondary">
+          <Button onClick={handleCloseForm} color="secondary">
             Cancel
           </Button>
           <Button onClick={handleAddTeacher} color="default">
@@ -96,8 +199,4 @@ const CreateTeacher = ({ isOpen, closeForm, addTeacher, classes }) => {
   );
 };
 
-const Form = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(CreateTeacher));
-export default Form;
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTeacher);
