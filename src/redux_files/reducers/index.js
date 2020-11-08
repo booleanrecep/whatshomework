@@ -6,6 +6,7 @@ import {
   OPEN_SCHOOL_FORM,
   CLOSE_SCHOOL_FORM,
   RESEND_DATA,
+  DELETE_SCHOOL,
 } from "../constants/index";
 import { dummyData } from "../../data";
 
@@ -18,27 +19,33 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_SCHOOL:
-    state.schools.push(action.school)
-     break
-j
-    case ADD_TEACHER:
-      // console.log(action);
-      // console.log(state);
-      // state.teachers.push(action.teacher);
-      state.schools.map((school) =>
-        school.name === action.teacher.school
-          ? school.teachers.push(action.teacher.teacherID)
-          : school
-      );
-
       return {
         ...state,
-        teachers:[
-          ...state.teachers,
-          action.teacher
-        ]
-      }
-      // break
+        schools: state.schools.concat(action.school),
+      };
+
+      break;
+    case DELETE_SCHOOL:
+      return {
+        ...state,
+        schools: state.schools.filter(
+          (school) => school.name !== action.school
+        ),
+      };
+
+    case ADD_TEACHER:
+      return {
+        ...state,
+        teachers: [...state.teachers, action.teacher],
+        schools: state.schools.map((school) =>
+          school.name === action.teacher.school
+            ? {
+                ...school,
+                teachers: [...school.teachers, action.teacher.teacherID],
+              }
+            : school
+        ),
+      };
 
     case OPEN_SCHOOL_FORM:
       return {
@@ -61,7 +68,7 @@ j
         teacherFormIsOpen: false,
       };
     case RESEND_DATA:
-      return (state = action.state);
+      return state;
     default:
       return state;
   }

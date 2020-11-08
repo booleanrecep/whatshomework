@@ -12,6 +12,8 @@ import {
 import { Tooltip, Fab, IconButton, Avatar } from "@material-ui/core";
 import NoteAddOutlinedIcon from "@material-ui/icons/NoteAddOutlined";
 import AccountBalanceTwoToneIcon from "@material-ui/icons/AccountBalanceTwoTone";
+import DeleteIcon from "@material-ui/icons/Delete";
+
 import op from "../images/op.png";
 import CreateSchool from "../forms/CreateSchool";
 import {
@@ -38,6 +40,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     openForm: () => dispatch({ type: "OPEN_SCHOOL_FORM" }),
+    deleteSchool: (school) => dispatch({ type: "DELETE_SCHOOL", school }),
   };
 };
 const useStyles = makeStyles((theme) => ({
@@ -55,14 +58,13 @@ const useStyles = makeStyles((theme) => ({
 
 const INNER_WIDTH = window.outerWidth;
 
-const Schools = ({ schools, openForm }) => {
+const Schools = ({ schools, openForm, deleteSchool }) => {
   const classes = useStyles();
   let history = useHistory();
   const match = useRouteMatch();
-  const params = useParams();
-  const loc = useLocation();
+
   return (
-    <Grid container spacing={2} style={{ marginTop: "4em" }}>
+    <Grid container spacing={2} style={{ marginTop: "5em" }}>
       {schools &&
         schools.map(({ image, name, schoolId }) => {
           return (
@@ -73,6 +75,10 @@ const Schools = ({ schools, openForm }) => {
                   elevation={3}
                   style={{ textAlign: "center" }}
                 >
+                  <DeleteIcon
+                    style={{ marginLeft: "5em", cursor: "pointer" }}
+                    onClick={() => deleteSchool(name)}
+                  />
                   <CardMedia className={classes.media} image={image} />
                   <Button
                     onClick={() => history.push(`${match.url}/${name}`)}

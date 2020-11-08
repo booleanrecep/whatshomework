@@ -32,7 +32,11 @@ const mapStateToProps = (state) => {
   return { data: state };
 };
 
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getData: () => dispatch({ type: "RESEND_DATA" }),
+  };
+};
 const styles = makeStyles((theme) => ({
   absolute: {
     position: "fixed",

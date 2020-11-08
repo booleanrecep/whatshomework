@@ -60,7 +60,7 @@ const CreateTeacher = ({
   const ID = uuidv4();
 
   const [state, setState] = React.useState({
-    teacherID: "",
+    teacherID: `teacher${ID}`,
     name: "",
     school: schoolName,
     photo: "",
@@ -68,13 +68,14 @@ const CreateTeacher = ({
     homeworks: [],
     classrooms: [],
   });
+  console.log(state.teacherID);
   const handleChange = (e) => {
     e.preventDefault();
-    e.persist()
-    console.log(e.target.name)
+    e.persist();
+    console.log(e.target.name);
     setState((prevState) => ({
       ...prevState,
-      teacherID: `teacher${ID}`,
+
       [e.target.name]: e.target.value,
       // classrooms: state.classrooms,
     }));
@@ -85,7 +86,7 @@ const CreateTeacher = ({
     setState({
       teacherID: "",
       name: "",
-      school: "",
+      school: schoolName,
       photo: "",
       branch: "",
       homeworks: [],
@@ -158,13 +159,19 @@ const CreateTeacher = ({
               className={classes.input}
             />
 
-            <TextField select label="Classrooms" value={state.classrooms}>
+            <TextField
+              select
+              label="Classrooms"
+              defaultValue="Choose classrooms"
+            >
               {classroomToMap.map((classroom) => (
                 <MenuItem
                   onClick={() =>
                     setState((prevState) => ({
                       ...prevState,
-                      classrooms:state.classrooms.includes(classroom.name)?state.classrooms: state.classrooms.concat(classroom.name),
+                      classrooms: state.classrooms.includes(classroom.name)
+                        ? state.classrooms
+                        : state.classrooms.concat(classroom.name),
                     }))
                   }
                   style={{ width: "4em" }}
@@ -199,4 +206,5 @@ const CreateTeacher = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTeacher);
+const Form = connect(mapStateToProps, mapDispatchToProps)(CreateTeacher);
+export default Form;

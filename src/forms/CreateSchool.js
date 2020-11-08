@@ -58,6 +58,7 @@ const CreateSchool = ({ isOpen, closeForm, addSchool }) => {
   const handleAddSchool = () => {
     addSchool(state);
     closeForm();
+    setState({});
   };
 
   return (
